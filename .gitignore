@@ -1,0 +1,8 @@
+# raw DEM tile cache (regenerable via scripts/fetch_dem.py)
+data/dem/tiles/
+# session test artifacts (regenerable via scripts/verify_v2.mjs / shot_v2.mjs)
+gui-test-screenshots/
+__pycache__/
+*.pyc
+*.log
+.DS_Store

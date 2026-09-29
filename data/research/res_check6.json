@@ -1,0 +1,97 @@
+{
+ "regions": [
+  {
+   "region": "贾登峪",
+   "n_ways": 41,
+   "total_len_km": 49.0,
+   "minE_rel": -288.0,
+   "maxE_rel": 555.0,
+   "minE_abs": 1168.8,
+   "maxE_abs": 2011.8,
+   "cls": {
+    "road": 32,
+    "track": 7,
+    "path": 2
+   }
+  },
+  {
+   "region": "三湾",
+   "n_ways": 40,
+   "total_len_km": 30.5,
+   "minE_rel": -188.3,
+   "maxE_rel": 15.8,
+   "minE_abs": 1268.5,
+   "maxE_abs": 1472.6,
+   "cls": {
+    "road": 7,
+    "track": 1,
+    "path": 7,
+    "boardwalk": 19,
+    "steps": 6
+   }
+  },
+  {
+   "region": "喀纳斯湖畔",
+   "n_ways": 139,
+   "total_len_km": 76.9,
+   "minE_rel": -107.8,
+   "maxE_rel": 733.7,
+   "minE_abs": 1349.0,
+   "maxE_abs": 2190.5,
+   "cls": {
+    "road": 66,
+    "boardwalk": 32,
+    "path": 37,
+    "track": 2,
+    "steps": 2
+   }
+  },
+  {
+   "region": "观鱼台",
+   "n_ways": 10,
+   "total_len_km": 23.2,
+   "minE_rel": -100.1,
+   "maxE_rel": 548.4,
+   "minE_abs": 1356.7,
+   "maxE_abs": 2005.2,
+   "cls": {
+    "road": 2,
+    "path": 8
+   }
+  },
+  {
+   "region": "白哈巴",
+   "n_ways": 60,
+   "total_len_km": 42.0,
+   "minE_rel": -360.8,
+   "maxE_rel": 27.9,
+   "minE_abs": 1096.0,
+   "maxE_abs": 1484.7,
+   "cls": {
+    "road": 44,
+    "track": 4,
+    "path": 12
+   }
+  },
+  {
+   "region": "禾木",
+   "n_ways": 105,
+   "total_len_km": 121.5,
+   "minE_rel": -396.2,
+   "maxE_rel": 972.8,
+   "minE_abs": 1060.6,
+   "maxE_abs": 2429.6,
+   "cls": {
+    "road": 63,
+    "track": 9,
+    "path": 29,
+    "steps": 4
+   }
+  }
+ ],
+ "unassigned": 173,
+ "total": {
+  "n": 558,
+  "len_km": 1003.5754000000001
+ }
+}
