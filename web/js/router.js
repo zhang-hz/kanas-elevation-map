@@ -1,4 +1,13 @@
-/* router.js — geo helpers, DEM sampling, routing graph (Dijkstra), profiles */
+/* router.js — geo helpers, DEM sampling, routing graph (A*), profiles
+ *
+ * Routing design (v2):
+ *  - snapping produces several CANDIDATE projections (diverse, one per way);
+ *    when the user clicked a specific line, that way's projection is forced in.
+ *  - a waypoint's snap is chosen by TOTAL cost (arrive + leave), so a point
+ *    "on the way" wins over a nearby dead-end spur — routes truly pass through
+ *    waypoints instead of detouring to them.
+ *  - each leg is an A* search over the hiking-time cost (Tobler × surface).
+ */
 (function () {
   "use strict";
   const D = window.KANAS_DATA;
@@ -30,7 +39,6 @@
     return new Int16Array(buf);
   })();
 
-  /** bilinear elevation (relative to datum) at WGS84 position */
   function elevAt(lat, lon) {
     let c = (lon - G.w) / G.dLon - 0.5;
     let r = (G.n - lat) / G.dLat - 0.5;
@@ -60,10 +68,11 @@
   }
 
   const CLS_MULT = { path: 1.0, boardwalk: 1.0, steps: 1.35, track: 1.18, road: 1.22, link: 2.4 };
+  const WALK_KMH = 7; // > max Tobler speed, keeps the A* heuristic admissible
 
   function toblerHours(lenM, dE) {
     let s = dE / Math.max(lenM, 1);
-    if (s > 0.6) s = 0.6;           // clamp DEM step noise on steep cut slopes
+    if (s > 0.6) s = 0.6;
     if (s < -0.6) s = -0.6;
     const vKmh = 6 * Math.exp(-3.5 * Math.abs(s + 0.05));
     return (lenM / 1000) / vKmh;
@@ -76,7 +85,6 @@
     return toblerHours(e[5], dE) * mult;
   }
 
-  /** hours for part of an edge: t0..t1 (fraction from u to v) */
   function partialEdgeHours(ei, t0, t1) {
     const e = edges[ei];
     const mult = CLS_MULT[(D.ways[e[2]] || {}).cls] || 1.15;
@@ -120,22 +128,48 @@
   };
   Heap.prototype.size = function () { return this.a.length; };
 
-  /** project (x,y) onto every edge; return nearest point ON the network */
-  function nearestOnNetwork(x, y) {
-    let best = null, bestD = Infinity;
-    for (let ei = 0; ei < edges.length; ei++) {
-      const e = edges[ei];
-      const a = nodes[e[0]], b = nodes[e[1]];
-      const dx = b[0] - a[0], dy = b[1] - a[1];
-      const l2 = dx * dx + dy * dy;
-      let t = 0;
-      if (l2 > 0) t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy) / l2));
-      const qx = a[0] + dx * t, qy = a[1] + dy * t;
-      const d = distM(x, y, qx, qy);
-      if (d < bestD) {
-        bestD = d;
-        best = { ei, t, x: qx, y: qy, dist: d };
+  // ---------------- snapping ----------------
+  function projectOnEdge(ei, x, y) {
+    const e = edges[ei];
+    const a = nodes[e[0]], b = nodes[e[1]];
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const l2 = dx * dx + dy * dy;
+    let t = 0;
+    if (l2 > 0) t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy) / l2));
+    const qx = a[0] + dx * t, qy = a[1] + dy * t;
+    return { ei, t, x: qx, y: qy, dist: distM(x, y, qx, qy) };
+  }
+
+  /** top-k candidate snaps: one per distinct way (diverse), hint-way forced in */
+  function snapCandidates(x, y, hint, k) {
+    const all = [];
+    for (let ei = 0; ei < edges.length; ei++) all.push(projectOnEdge(ei, x, y));
+    all.sort((p, q) => p.dist - q.dist);
+    const out = [];
+    const seenWays = new Set();
+    if (hint != null && hint >= 0 && D.ways[hint]) {
+      let best = null;
+      for (const p of all) {
+        if (edges[p.ei][2] === hint && (!best || p.dist < best.dist)) best = p;
       }
+      if (best) { out.push(best); seenWays.add(hint); }
+    }
+    for (const p of all) {
+      if (p.dist > 400) break;
+      const w = edges[p.ei][2];
+      if (seenWays.has(w)) continue;
+      seenWays.add(w);
+      out.push(p);
+      if (out.length >= k) break;
+    }
+    return out.length ? out : (all.length ? [all[0]] : []);
+  }
+
+  function nearestOnNetwork(x, y) {
+    let best = null;
+    for (let ei = 0; ei < edges.length; ei++) {
+      const p = projectOnEdge(ei, x, y);
+      if (!best || p.dist < best.dist) best = p;
     }
     return best;
   }
@@ -150,7 +184,7 @@
     return { idx: best, dist: Math.sqrt(bestD) * 1000 };
   }
 
-  // ---------------- way profile slicing ----------------
+  // ---------------- profile slicing ----------------
   function lowerBound(arr, v) {
     let lo = 0, hi = arr.length;
     while (lo < hi) {
@@ -170,7 +204,6 @@
     return seg === 0 ? es[i0] : lerp(es[i0], es[i1], (d - ds[i0]) / seg);
   }
 
-  /** points of way between d0..d1, ordered along travel direction */
   function sliceWayDir(way, d0, d1, reverse) {
     let a = Math.min(d0, d1), b = Math.max(d0, d1);
     const ds = way.d, es = way.e;
@@ -183,7 +216,6 @@
     return reverse ? out.slice().reverse() : out;
   }
 
-  /** profile of edge part t0..t1 (fractions from u), rebased to cumulative m */
   function edgeProfile(ei, t0, t1) {
     const e = edges[ei];
     const way = D.ways[e[2]];
@@ -206,23 +238,23 @@
     }
   }
 
-  // ---------------- Dijkstra between two snapped network points ----------------
-  function route(x1, y1, x2, y2) {
-    const s = nearestOnNetwork(x1, y1);
-    const t = nearestOnNetwork(x2, y2);
-    if (!s || !t) return { error: "路网数据缺失" };
-
-    // start candidates: both endpoints of the edge holding the projection
-    const se = edges[s.ei], te = edges[t.ei];
-    const starts = [
-      { node: se[0], t: 0, extra: s.dist + partialEdgeHours(s.ei, s.t, 0) },
-      { node: se[1], t: 1, extra: s.dist + partialEdgeHours(s.ei, s.t, 1) },
-    ];
-    // note: extra mixes meters and hours; use hours for dijkstra, meters separately
+  // ---------------- one leg between two snapped points (A*) ----------------
+  function dijkstraLeg(sa, sb) {
+    if (!sa || !sb) return null;
+    if (sa.ei === sb.ei) {
+      return { ok: true, hours: partialEdgeHours(sa.ei, sa.t, sb.t), sameEdge: true };
+    }
+    const se = edges[sa.ei], te = edges[sb.ei];
     const startCost = [
-      toblerHours(s.dist, 0) + partialEdgeHours(s.ei, s.t, 0),
-      toblerHours(s.dist, 0) + partialEdgeHours(s.ei, s.t, 1),
+      toblerHours(sa.dist, 0) + partialEdgeHours(sa.ei, sa.t, 0),
+      toblerHours(sa.dist, 0) + partialEdgeHours(sa.ei, sa.t, 1),
     ];
+    const endExtra = [
+      toblerHours(sb.dist, 0) + partialEdgeHours(sb.ei, 0, sb.t),
+      toblerHours(sb.dist, 0) + partialEdgeHours(sb.ei, 1, sb.t),
+    ];
+    const endNodes = [te[0], te[1]];
+    const goal = { x: sb.x, y: sb.y, a: nodes[te[0]], b: nodes[te[1]] };
 
     const n = nodes.length;
     const dist = new Float64Array(n).fill(Infinity);
@@ -230,35 +262,42 @@
     const prevEdge = new Int32Array(n).fill(-1);
     const prevFwd = new Uint8Array(n);
     const heap = new Heap();
+    const h = (i) => {
+      const g = nodes[i];
+      const d = Math.min(
+        distM(g[0], g[1], goal.x, goal.y),
+        distM(g[0], g[1], goal.a[0], goal.a[1]),
+        distM(g[0], g[1], goal.b[0], goal.b[1]));
+      return (d / 1000) / WALK_KMH;
+    };
     for (let k = 0; k < 2; k++) {
-      const nd = starts[k].node;
+      const nd = k === 0 ? se[0] : se[1];
       if (startCost[k] < dist[nd]) {
         dist[nd] = startCost[k];
-        heap.push(startCost[k], nd);
+        heap.push(startCost[k] + h(nd), nd);
       }
     }
-    const endCandidates = [te[0], te[1]];
-    const endExtra = [
-      toblerHours(t.dist, 0) + partialEdgeHours(t.ei, 1, t.t),
-      toblerHours(t.dist, 0) + partialEdgeHours(t.ei, 0, t.t),
-    ];
-    let visited = 0;
+    const done = new Uint8Array(n);
+    let bestTotal = Infinity;
     while (heap.size()) {
       const top = heap.pop();
-      const cost = top[0], u = top[1];
-      if (cost > dist[u]) continue;
-      if (endCandidates.indexOf(u) >= 0 && cost > Math.min(...endCandidates.map((c, i) => dist[c] + endExtra[i]))) {
-        // both ends reachable and current cost already beyond best complete cost
-        break;
+      const f = top[0], u = top[1];
+      if (done[u]) continue;
+      done[u] = 1;
+      const cost = dist[u];
+      if (cost + Math.min(endExtra[0], endExtra[1]) >= bestTotal) break;
+      const ei0 = endNodes.indexOf(u);
+      if (ei0 >= 0) {
+        const total = cost + endExtra[ei0];
+        if (total < bestTotal) bestTotal = total;
       }
-      visited++;
       const fw = adjF[u], bw = adjB[u];
       if (fw) for (let k = 0; k < fw.length; k++) {
         const ei = fw[k], v = edges[ei][1];
         const nc = cost + edgeHours(ei, true);
         if (nc < dist[v]) {
           dist[v] = nc; prev[v] = u; prevEdge[v] = ei; prevFwd[v] = 1;
-          heap.push(nc, v);
+          heap.push(nc + h(v), v);
         }
       }
       if (bw) for (let k = 0; k < bw.length; k++) {
@@ -266,38 +305,21 @@
         const nc = cost + edgeHours(ei, false);
         if (nc < dist[v]) {
           dist[v] = nc; prev[v] = u; prevEdge[v] = ei; prevFwd[v] = 0;
-          heap.push(nc, v);
+          heap.push(nc + h(v), v);
         }
       }
     }
-
-    // best end node
-    let endNode = -1, bestTotal = Infinity, bestEndExtra = 0, bestEndT = 1;
+    let endNode = -1, bestEnd = Infinity, endT = 1;
     for (let i = 0; i < 2; i++) {
-      const nd = endCandidates[i];
-      const total = dist[nd] + endExtra[i];
-      if (isFinite(total) && total < bestTotal) {
-        bestTotal = total;
-        endNode = nd;
-        bestEndExtra = endExtra[i];
-        bestEndT = i === 0 ? 1 : 0; // which end of te the route arrives at
-      }
+      const total = dist[endNodes[i]] + endExtra[i];
+      if (total < bestEnd) { bestEnd = total; endNode = endNodes[i]; endT = i === 0 ? 1 : 0; }
     }
-    if (endNode < 0 || !isFinite(bestTotal)) {
-      return { error: "两点之间路网不连通，无法规划步行线路", snapA: s, snapB: t };
-    }
+    if (endNode < 0 || !isFinite(bestEnd)) return null;
 
-    // start node actually used
-    let startNode = -1;
-    {
-      const s0 = startCost[0], s1 = startCost[1];
-      // whichever source reached this path: use predecessor chain end
-      startNode = endNode;
-      while (prev[startNode] >= 0) startNode = prev[startNode];
-    }
+    let startNode = endNode;
+    while (prev[startNode] >= 0) startNode = prev[startNode];
     const startT = (startNode === se[0]) ? 0 : 1;
 
-    // reconstruct middle edges
     const pathEdges = [];
     let cur = endNode;
     while (cur !== startNode && cur >= 0) {
@@ -307,68 +329,115 @@
       cur = prev[cur];
     }
     pathEdges.reverse();
-
-    // -------- assemble profile + line --------
-    const prof = [[0, elevAtKm(x1, y1)]];
-    const line = [[x1, y1]];
-    let dAcc = s.dist;
-    if (s.dist > 0.5) prof.push([dAcc, elevAtKm(s.x, s.y)]);
-    line.push([s.x, s.y]);
-
-    // partial edge from projection to start node
-    const legStart = edgeProfile(s.ei, s.t, startT);
-    appendProf(prof, legStart.map(p => [p[0], p[1]]));
-    if (legStart.length) dAcc += legStart[legStart.length - 1][0];
-    line.push([nodes[startNode][0], nodes[startNode][1]]);
-
-    for (let i = 0; i < pathEdges.length; i++) {
-      const ei = pathEdges[i][0], fwd = pathEdges[i][1];
-      const leg = edgeProfile(ei, fwd ? 0 : 1, fwd ? 1 : 0);
-      appendProf(prof, leg);
-      dAcc += leg[leg.length - 1][0];
-      const vn = fwd ? edges[ei][1] : edges[ei][0];
-      line.push([nodes[vn][0], nodes[vn][1]]);
-    }
-
-    // partial edge from end node to end projection
-    const legEnd = edgeProfile(t.ei, bestEndT, t.t);
-    appendProf(prof, legEnd);
-    if (legEnd.length) dAcc += legEnd[legEnd.length - 1][0];
-    line.push([t.x, t.y]);
-
-    if (t.dist > 0.5) {
-      dAcc += t.dist;
-      prof.push([dAcc, elevAtKm(x2, y2)]);
-    }
-    line.push([x2, y2]);
-
-    const hours = bestTotal;
     return {
-      ok: true,
-      snapA: s, snapB: t,
-      line, prof, hours,
-      stats: computeStats(prof, hours),
-      visited,
+      ok: true, hours: bestEnd, pathEdges,
+      startNode, startT, endNode, endT,
     };
   }
 
-  /** route through waypoints: [A, W1, ..., B] */
-  function routeVia(points) {
-    if (points.length < 2) return { error: "至少需要两个点" };
-    const legs = [];
-    for (let i = 0; i < points.length - 1; i++) {
-      const r = route(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1]);
-      if (r.error) return r;
-      legs.push(r);
+  // ---------------- assemble a leg into line + profile ----------------
+  function assembleLeg(sa, sb, leg, x1, y1, x2, y2) {
+    const prof = [[0, elevAtKm(x1, y1)]];
+    const line = [[x1, y1]];
+    let dAcc = sa.dist;
+    if (sa.dist > 0.5) prof.push([dAcc, elevAtKm(sa.x, sa.y)]);
+    line.push([sa.x, sa.y]);
+
+    if (leg.sameEdge) {
+      const mid = edgeProfile(sa.ei, sa.t, sb.t);
+      appendProf(prof, mid);
+      dAcc += mid[mid.length - 1][0];
+      line.push([sb.x, sb.y]);
+    } else {
+      const legStart = edgeProfile(sa.ei, sa.t, leg.startT);
+      appendProf(prof, legStart);
+      if (legStart.length) dAcc += legStart[legStart.length - 1][0];
+      line.push([nodes[leg.startNode][0], nodes[leg.startNode][1]]);
+
+      for (let i = 0; i < leg.pathEdges.length; i++) {
+        const ei = leg.pathEdges[i][0], fwd = leg.pathEdges[i][1];
+        const lp = edgeProfile(ei, fwd ? 0 : 1, fwd ? 1 : 0);
+        appendProf(prof, lp);
+        dAcc += lp[lp.length - 1][0];
+        const vn = fwd ? edges[ei][1] : edges[ei][0];
+        line.push([nodes[vn][0], nodes[vn][1]]);
+      }
+      const legEnd = edgeProfile(sb.ei, leg.endT, sb.t);
+      appendProf(prof, legEnd);
+      if (legEnd.length) dAcc += legEnd[legEnd.length - 1][0];
+      line.push([sb.x, sb.y]);
     }
+
+    if (sb.dist > 0.5) {
+      dAcc += sb.dist;
+      prof.push([dAcc, elevAtKm(x2, y2)]);
+    }
+    line.push([x2, y2]);
+    return { line, prof, hours: leg.hours + toblerHours(sa.dist, 0) + toblerHours(sb.dist, 0) };
+  }
+
+  // ---------------- route through points ----------------
+  function route(x1, y1, x2, y2, hintA, hintB) {
+    return routeVia([[x1, y1], [x2, y2]], [hintA, hintB]);
+  }
+
+  function routeVia(points, hints) {
+    if (points.length < 2) return { error: "至少需要两个点" };
+    hints = hints || [];
+    const n = points.length;
+
+    // 1) pick interior waypoint snaps by total (arrive + leave) cost,
+    //    so "on the way" positions beat nearby dead-end spurs
+    const snaps = new Array(n).fill(null);
+    for (let j = 1; j < n - 1; j++) {
+      const cands = snapCandidates(points[j][0], points[j][1], hints[j], 5);
+      if (!cands.length) return { error: "路网数据缺失" };
+      const prevSnap = snaps[j - 1] ||
+        snapCandidates(points[j - 1][0], points[j - 1][1], hints[j - 1], 1)[0];
+      const nextSnap = snapCandidates(points[j + 1][0], points[j + 1][1], hints[j + 1], 1)[0];
+      let best = cands[0], bestScore = Infinity;
+      for (const c of cands) {
+        const inL = dijkstraLeg(prevSnap, c);
+        const outL = dijkstraLeg(c, nextSnap);
+        if (!inL || !outL) continue;
+        const score = inL.hours + outL.hours + 2 * toblerHours(c.dist, 0);
+        if (score < bestScore) { bestScore = score; best = c; }
+      }
+      snaps[j] = best;
+    }
+
+    // 2) build legs; endpoints explore 3 candidates jointly with the leg cost
+    const legs = [];
+    for (let j = 0; j < n - 1; j++) {
+      const candsA = j > 0 ? [snaps[j]]
+        : snapCandidates(points[j][0], points[j][1], hints[j], 3);
+      const candsB = j < n - 2 ? [snaps[j + 1]]
+        : snapCandidates(points[j + 1][0], points[j + 1][1], hints[j + 1], 3);
+      if (!candsA.length || !candsB.length) return { error: "路网数据缺失" };
+      let best = null;
+      for (const sa of candsA) {
+        for (const sb of candsB) {
+          const leg = dijkstraLeg(sa, sb);
+          if (!leg) continue;
+          const total = leg.hours + toblerHours(sa.dist, 0) + toblerHours(sb.dist, 0);
+          if (!best || total < best.total) best = { leg, sa, sb, total };
+        }
+      }
+      if (!best) {
+        return { error: "两点之间路网不连通，无法规划步行线路" };
+      }
+      legs.push(assembleLeg(best.sa, best.sb, best.leg,
+        points[j][0], points[j][1], points[j + 1][0], points[j + 1][1]));
+    }
+
+    // 3) stitch legs
     const prof = [];
     const line = [];
-    let hours = 0;
-    let base = 0;
+    let hours = 0, base = 0;
     legs.forEach((r, i) => {
       hours += r.hours;
       r.prof.forEach((p, j) => {
-        if (i > 0 && j === 0) return; // avoid duplicate junction point
+        if (i > 0 && j === 0) return;
         prof.push([base + p[0], p[1]]);
       });
       base += r.prof[r.prof.length - 1][0];
@@ -408,7 +477,7 @@
     };
   }
 
-  // ---------------- straight-line profile (terrain reference) ----------------
+  // ---------------- straight-line profiles ----------------
   function straightProfile(x1, y1, x2, y2) {
     const len = distM(x1, y1, x2, y2);
     const n = Math.max(2, Math.min(1200, Math.round(len / 60)));
@@ -423,7 +492,6 @@
     return { ok: true, prof, stats: computeStats(prof, 0), line: [[x1, y1], [x2, y2]] };
   }
 
-  /** full multi-point straight profile through waypoints */
   function straightVia(points) {
     const prof = [];
     const line = [points[0]];
@@ -452,7 +520,8 @@
 
   K.geo = { toKm, toLatLon, distM, lerp, elevAt, elevAtKm };
   K.router = {
-    nearestNode, nearestOnNetwork, route, routeVia,
+    nearestNode, nearestOnNetwork, snapCandidates,
+    route, routeVia, dijkstraLeg,
     straightProfile, straightVia,
     sliceWayDir, sampleElevAt, edgeProfile,
     computeStats, fmtDist, fmtTime, toblerHours, nodes, edges,

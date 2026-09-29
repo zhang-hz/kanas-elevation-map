@@ -119,10 +119,10 @@
     });
   }
 
-  function handleMapClick(lat, lon) {
+  function handleMapClick(lat, lon, hintWay) {
     if (state.mode === "browse") return;
     const km = geo.toKm(lat, lon);
-    const pt = { x: km[0], y: km[1], lat, lon };
+    const pt = { x: km[0], y: km[1], lat, lon, hint: hintWay };
     const n = state.pts.length;
     if (state.insertMode && n >= 2) {
       state.pts.splice(n - 1, 0, pt); // insert before B
@@ -166,7 +166,7 @@
     if (state.mode === "straight") {
       r = router.straightVia(pts.map(p => [p.x, p.y]));
     } else {
-      r = router.routeVia(pts.map(p => [p.x, p.y]));
+      r = router.routeVia(pts.map(p => [p.x, p.y]), pts.map(p => p.hint));
       if (r.error) {
         r = router.straightVia(pts.map(p => [p.x, p.y]));
         fallback = true;
@@ -521,9 +521,9 @@
   // ---------------- expose to map.js ----------------
   K.app = {
     handleMapClick,
-    handleMapClickKm(x, y) {
+    handleMapClickKm(x, y, hintWay) {
       const ll = geo.toLatLon(x, y);
-      handleMapClick(ll[0], ll[1]);
+      handleMapClick(ll[0], ll[1], hintWay);
     },
     isMeasure: () => state.mode !== "browse",
     setPoint,

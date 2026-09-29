@@ -109,12 +109,12 @@
   let suppressClick = 0;
 
   /** in measurement modes every click places a point; in browse mode it opens info */
-  function measureOr(fn) {
+  function measureOr(fn, hintWay) {
     return e => {
       if (K.app && K.app.isMeasure && K.app.isMeasure()) {
         L.DomEvent.stopPropagation(e.originalEvent || e);
         suppressClick = Date.now() + 350;
-        K.app.handleMapClickKm(e.latlng.lng, e.latlng.lat);
+        K.app.handleMapClickKm(e.latlng.lng, e.latlng.lat, hintWay);
       } else {
         L.DomEvent.stopPropagation(e.originalEvent || e);
         suppressClick = Date.now() + 350;
@@ -187,7 +187,7 @@
     }
     const [hit, vis] = clickableLine(
       latlngs, WAY_STYLE[w.cls] || WAY_STYLE.path, "vec",
-      measureOr(e => openWayPopup(idx, e.latlng)),
+      measureOr(e => openWayPopup(idx, e.latlng), idx),
       w.name || null);
     wayLayers[idx] = vis;
     if (isRoad) roadFills.push(hit, vis);
