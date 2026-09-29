@@ -397,6 +397,26 @@
     toast("已导出高程剖面图 PNG（2×）");
   });
 
+  const hsImg = new Image();
+  hsImg.src = "data/hillshade.png";
+
+  $("#btn-pdf").addEventListener("click", async () => {
+    const c = state.current;
+    if (!c) { toast("请先规划一条线路"); return; }
+    if (hsImg.decode) await hsImg.decode().catch(() => {}); // 等底图就绪再出图
+    const pts = state.pts.map((p) => ({
+      x: p.x, y: p.y, lat: p.lat, lon: p.lon,
+      e: geo.elevAtKm(p.x, p.y), hint: p.hint || "",
+    }));
+    const r = K.report.exportPdf({
+      label: c.label, stats: c.stats, prof: c.prof, line: c.line, pts,
+      eOff: state.eOff,
+      zeroName: D.meta.datum.name, zeroAbs: D.meta.datum.elevAbs,
+      hillshadeImg: hsImg,
+    });
+    toast("已导出 PDF 线路报告（" + r.pages + " 页，含摘要/剖面/地图/分段/逐公里表）");
+  });
+
   // ---------------- datum zero ----------------
   function setZero(relVal) {
     state.eOff = relVal;

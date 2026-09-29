@@ -68,13 +68,14 @@
   }
 
   const CLS_MULT = { path: 1.0, boardwalk: 1.0, steps: 1.35, track: 1.18, road: 1.22, link: 2.4 };
-  const WALK_KMH = 7; // > max Tobler speed, keeps the A* heuristic admissible
+  const WALK_V0 = 4.3;   // 散步配速基准（平地约 3.6 km/h）
+  const WALK_KMH = 4.5;  // A* 启发式速度上限（须 ≥ 最快可能速度，保证启发式可采纳）
 
   function toblerHours(lenM, dE) {
     let s = dE / Math.max(lenM, 1);
     if (s > 0.6) s = 0.6;
     if (s < -0.6) s = -0.6;
-    const vKmh = 6 * Math.exp(-3.5 * Math.abs(s + 0.05));
+    const vKmh = WALK_V0 * Math.exp(-3.5 * Math.abs(s + 0.05));
     return (lenM / 1000) / vKmh;
   }
 
