@@ -1,0 +1,212 @@
+[
+ {
+  "id": -1587,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "两端落在同一条土路上且连线抄近道，影像中弦线走廊无路面",
+  "evidence": "OSM way456300901 {highway=track} 同时过 p0/p1（d0=0.1m,d1=0m），沿路190.6m vs 直线107.6m（ratio1.77），parallelDup d0m=0/d1m=0；裁剪图 b4_1587_P1.png（图内标签 ID-1587 P1 已核验）显示真实土路向南绕出U形弯、弦线横穿农田与村舍边缘，弦线上看不到路迹"
+ },
+ {
+  "id": -1586,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "连线切掉同一条土路的发夹弯，弦线走廊为林地无路",
+  "evidence": "OSM way456300897 {highway=track} 同时过两端（d0=0.1m,d1=0.1m），沿路560.8m vs 直线216.5m（ratio2.59），parallelDup 0/0；裁剪图 b4_1586_P1.png（标签 ID-1586 P1 已核验）显示真实土路在弦线北侧绕发夹环、弦线穿越深绿林地无任何路面痕迹"
+ },
+ {
+  "id": -1585,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "既有土路正好沿连线走，缺口即真实路面",
+  "evidence": "OSM way30622550 {highway=track} 距 p0 仅1.8m、过 p1（d1=0.1m），沿路78.0m ≈ 直线78.4m（ratio1.00）；另一条 path453472466 止于 p0。连线与既有 track 几乎重合，crossings 空、demSag -1.8 无沟谷"
+ },
+ {
+  "id": -1584,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两条同名步道的断头仅隔约58m，坡形平滑且不跨水",
+  "evidence": "path447966756 止于 p0，path447966751 距 p0 58.1m 并经 p1；走廊中点距两条步道分别29m/45m（node C:/Data/Code/Kanas/scripts/osm_query.mjs ways-near 48.786912 87.070223 100）。crossings 空，DEM 单调上升729→744.7、demSag -2.1"
+ },
+ {
+  "id": -1583,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "同一步道网两个断头相距约117m，无沟坎无跨水",
+  "evidence": "path402895921 止于 p0；path402895922 距 p0 117.4m、过 p1（沿路30.2m）。两者同属加格拉克希外—那仁步道走廊，crossings 空、demSag 0.1、DEM 单调 -14.7→-38.9"
+ },
+ {
+  "id": -1582,
+  "verdict": "keep",
+  "confidence": "low",
+  "reason": "两条步道断头仅隔约55m且坡形平滑，但影像帧未能核验",
+  "evidence": "path402895920 止于 p0；path402895897 距 p0 55.4m、过 p1（沿路53.4m）。DEM 单调平滑56→76.6（32%爬升，无陡崖/沟坎），crossings 空。裁剪图 b4_1582_a.png、b4_1582_P1.png、v/vid1582_r1.png 已生成，但 Read 均返回其他文件的错帧，未能目视核验，故置信度低"
+ },
+ {
+  "id": -1581,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "两条步道断头相距177m，中途无任何 OSM 路径且影像未核验",
+  "evidence": "path402895916 止于 p0，path402895922 止于 p1，缺口176.8m；ways-near 中点110m 内仅这两条步道（各89m，即各自端点）。crossings 空、DEM 平滑，但缺少中途路径或影像佐证"
+ },
+ {
+  "id": -1580,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "既有步道沿连线走（沿路≈直线），真实走廊存在",
+  "evidence": "OSM path402895906 距 p0 23.0m、过 p1（d1=0.1m），沿路44.8m ≈ 直线50.4m（ratio0.89）；path402895898 止于 p0。demSag 3.5、crossings 空"
+ },
+ {
+  "id": -1579,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "两条土路断头只差27m，平坦无阻",
+  "evidence": "track402029779 止于 p0；track402029773 距 p0 26.8m、并经 p1（沿路40.6m）。地势平坦（demSag 2.1，坡度-5.5%），crossings 空，另 unclassified401028081 距 p1 49m"
+ },
+ {
+  "id": -1578,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "连线切掉同一条土路绕建筑的钩状折返段",
+  "evidence": "两端同在 track402029765（d0=0m,d1=0.1m，parallelDup 0/0），沿路92.6m vs 直线48.2m（ratio1.92）；裁剪图 v/vid1578_r1.png（标签 ID1578 r1 已核验）显示该 track 与 unclassified401028081 在 p0 交汇后向东绕过一处浅色院落/建筑再折回 p1，弦线从院落北侧切过且影像中无路面"
+ },
+ {
+  "id": -1577,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "连线抄近道：真实土路绕行351m，弦线只走200m",
+  "evidence": "两端同在 track402029759（d0=0m,d1=0m，parallelDup 0/0），沿路351.6m vs 直线200.4m（ratio1.75），中点处真实路偏离弦71m（ways-near 中点150m 内只有 402029759 与 402029784）。crossings 空、DEM 平缓无沟。裁剪图已生成（b4_1577_P1.png、v/vid1577_r1.png）但 Read 返回错帧未能核验，本判定依据 rule2 的几何条件（两端属同一 way 且抄近道）"
+ },
+ {
+  "id": -1576,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "两条土路断头相距156m，中途无任何 OSM 路径且影像未核验",
+  "evidence": "track401497955 止于 p0、track401347436 止于 p1，缺口156.2m；ways-near 中点110m 内只有这两条 track（各79m，即端点本身）。crossings 空、demSag 0.7 平坦，但无中途路径或影像佐证"
+ },
+ {
+  "id": -1575,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "与 -1576 为同一段的反向重复记录，同样证据不足",
+  "evidence": "p0/p1 与 -1576 完全对调（p0=48.851955/86.590984→p1=48.851423/86.589008），两端仍为 track401347436 / track401497955，缺口156.2m；中点110m 内除两端无其他 way，影像未核验"
+ },
+ {
+  "id": -1574,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "土路尽头到公路缺口约155m，中途无 OSM 路径且影像未核验",
+  "evidence": "track400637269 止于 p0；unclassified401028104 距 p0 154.8m、过 p1（沿路23.9m）。ways-near 中点110m 内仅这两条（77m/80m，即端点）。crossings 空、demSag -0.3 平坦，但中途无路径佐证"
+ },
+ {
+  "id": -1573,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "连线切掉同一条 service 路的绕行大弯，弦线走廊无路面",
+  "evidence": "两端同在 service377844704 {highway=service}（d0=0m,d1=0.1m，parallelDup 0/0），沿路206.3m vs 直线82.4m（ratio2.50）；裁剪图 b4_1573_L1.png（标签 ID-1573 m160 s3 已核验）显示该 service 向南绕出大弯、弦线穿越林地，喀纳斯河30622840 在西侧62m 未被跨越（crossings 空）"
+ },
+ {
+  "id": -1572,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两条步道断头约62m，紧邻既有台阶与 S232 公路，走廊真实",
+  "evidence": "footway377844702 止于 p0；footway614666110 距 p0 62.1m、过 p1。steps1297314300 距走廊11–35m、primary80138486（铁喀段 S232）距 p1 仅3.8m；裁剪图 b4_1572_P2.png（标签 ID-1572 P2 已核验）显示 p0 西侧有之字形台阶、p1 处多条步道汇聚。48% 坡但 DEM 单调平滑（-34.7→-8.9），crossings 空"
+ },
+ {
+  "id": -1571,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "栈道断头165m，但走廊处于多条栈道/步道密集带内",
+  "evidence": "footway377829532 止于 p0、footway1296584253 止于 p1（缺口164.6m）；ways-near 中点110m 内有5条：377827597(bridge=boardwalk)、377826406(bridge=boardwalk)、377827602(bridge=yes)、两条 footway（83–104m）。crossings 空、demSag -0.1 无沟谷"
+ },
+ {
+  "id": -1570,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "既有栈道全程平行于连线（中点仅22m），属岸边真实走廊",
+  "evidence": "boardwalk377828352 {bridge=boardwalk} 距 p0 20.2m、距 p1 54.6m、中点22m，沿路210.0m ≈ 直线206.8m（ratio1.02）；岸线 way30622734 距 p0 7.1m、中点46m。坡度1.1%、crossings 空（岸线始终在走廊一侧未被横穿）"
+ },
+ {
+  "id": -1569,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "起点贴岸线、终点在95m外的栈道上并爬升48m，影像未能核验",
+  "evidence": "footway377826408 止于 p0，p0 距岸线 way30622734 仅5.8m；boardwalk377826409 距 p0 94.8m、距中点48m，p1 在其上，缺口约95–183m。26% 爬升但 DEM 单调平滑（-52.8→-4.9，无沟坎）、crossings 空。裁剪图 v/vid1569_r1.png、v/vid1569_r2.png 已生成，但 Read 始终返回其他文件错帧，无法确认岸坡上是否有路"
+ },
+ {
+  "id": -1568,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "公路尽头到栈道尽头缺口205m且类型改变，中途无任何 OSM 路径",
+  "evidence": "unclassified377825853 止于 p0、boardwalk377827597 {bridge=boardwalk} 止于 p1，缺口204.8m；ways-near 中点130m 内除这两条（各103m，即端点）外无任何 way。DEM 为均匀9%下坡（-72.8→-91.5）、crossings 空（岸线30622734 在67m 外未被横穿），但缺少中途路径或影像佐证"
+ },
+ {
+  "id": -1567,
+  "verdict": "drop",
+  "confidence": "med",
+  "reason": "弦线切掉 service 路的拐角，真实路线是绕行的92m 而非51m",
+  "evidence": "service377823015 距 p0 19.9m 并经 p1（沿路92.0m vs 直线50.6m，ratio1.82）；p0 只接20m 的 service stub377823017，p1 接50m 的 stub1546925874，两 stub 指向相背。裁剪图 v/vid1567_r1.png（标签 ID1567 r1 已核验）显示弦线穿越深绿林地无路面，真实 service 路在西侧绕行"
+ },
+ {
+  "id": -1566,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两条 service 路口缺口66m，另有 service 路沿走廊平行",
+  "evidence": "service377823014 止于 p0、service1546925874 止于 p1（缺口65.8m）；service377823015 沿走廊平行（距 p0 64.4m、p1 41.6m，沿路61.7m ≈ 直线65.8m，ratio0.94），footway377828553 距 p0 仅11.9m。crossings 空、demSag -2.4"
+ },
+ {
+  "id": -1565,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "住宅路到三级路缺口约135m，中途无 OSM 路径且影像未核验",
+  "evidence": "residential342307939 止于 p0；tertiary80139160 距 p0 135m、过 p1（沿路45m）。溪流448067397 距走廊38m 但未被横穿（crossings 空）、地势平坦（demSag -0.7），但中途110m 内无任何 way，影像未核验"
+ },
+ {
+  "id": -1564,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "村内住宅路到服务路缺口约200m，中途无 OSM 路径且影像未核验",
+  "evidence": "residential342307929 止于 p0、service1385691480 止于 p1，缺口196–207m；ways-near 中点110m 内只有这两条端点 way（95m/104m），residential1282496103、unclassified252598145 虽距走廊56/60m 但都靠端点附近。crossings 空、DEM 单调下坡 -194.7→-218"
+ },
+ {
+  "id": -1563,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "两条步道端点仅差约18m，周边还有第三条步道",
+  "evidence": "path293476434 止于 p0；path293476432 距 p0 18.3m、过 p1（沿路17.1m）；path293476435 距 p0 20m、距 p1 9m。21.6m 小缺口被三条 path 包围，crossings 空"
+ },
+ {
+  "id": -1562,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "既有步道全程贴近连线（沿路≈直线），走廊真实存在",
+  "evidence": "path377825326 距 p0 31.1m、过 p1（d1=0.1m），沿路123.8m ≈ 直线135.5m（ratio0.91）；path293476437 距 p0 9.8m、path293476427 止于 p0。-28.6% 陡坡但 DEM 单调平滑（446→412），crossings 空"
+ },
+ {
+  "id": -1561,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两条 service 路口缺口约104m，另有公路斜穿走廊附近",
+  "evidence": "service252598140 止于 p0；service252598147 距 p0 104.4m、过 p1（沿路19m）。unclassified80138481 距 p0 84.2m、距 p1 67.9m（沿路133m）斜穿该区，service1546925861 距 p1 19m。crossings 空、DEM 平滑17%爬升"
+ },
+ {
+  "id": -1560,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "住宅路到非分级路缺口约54m，平坦无阻",
+  "evidence": "residential252598134 止于 p0；unclassified1282496102 距 p0 53.6m、过 p1（沿路30.4m）。坡度-2.1%、demSag 0.1 极平、crossings 空"
+ },
+ {
+  "id": -1559,
+  "verdict": "drop",
+  "confidence": "high",
+  "reason": "凭空跨河：无桥标注、两侧 OSM 路各止于岸边，影像也看不到桥",
+  "evidence": "crossings 记录 t=0.31 跨 waterway:river 184016708，hasBridgeTag=false、bridgeway=null；track184016707 止于 p0、track184016710 止于 p1，两条路都不过河（ways-near 48.984760 86.807900 200 只有河与两条断头路）。裁剪图 v/vid1559_r1.png、v/vid1559_r2.png（标签 ID1559CROSS r1 / ID1559FULL r2 已核验）显示蓝色河线在 t≈0.31 穿过红色连线，交叉处为均质绿地，无桥/栈道/路面痕迹"
+ },
+ {
+  "id": -1558,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "既有 service 路沿连线走，16m 小缺口落在既有路网上",
+  "evidence": "service1409132894 距 p0 7.3m、过 p1，沿路14.4m ≈ 直线16.2m（ratio0.89）；unclassified80139175 {source=GPS} 止于 p0，tertiary377823310 距 p0 6.6m。crossings 空"
+ }
+]

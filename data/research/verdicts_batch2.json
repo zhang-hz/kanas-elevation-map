@@ -1,0 +1,226 @@
+[
+ {
+  "id": -1651,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "贾登峪村内同一公路两节点间的 130 m 缺口，两端为真实 OSM 节点、坡度仅 3.8%，影像显示走廊位于村庄建成区内、无水体。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1651_a.png（对同一瓦片做分类栅格目视：走廊全程为 '#'/'+' 亮色村庄地面并含建筑块，无 'W' 水体，water%=0）；几何事实：p0=node(way1409130228 service)、p1=node(way1409130237 service)，两端同名『贾登峪—贾登峪游服中心站公路』；25 m 容差既有路覆盖 43%（way252597987 residential）；crossings 空、demSag -0.3、最大局部坡度 4.6%。"
+ },
+ {
+  "id": -1650,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "喀纳斯新村 48 m 缺口，连接栈道端点与公路端点，无跨水（河流在其西北约 60 m 外），25 m 内既有路覆盖 53%。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1650_a.png（分类栅格目视：走廊为暗色林地/草地，'W' 水体只出现在图幅西北角、不压线，water%=0）；p0=node(way1409130199 footway)、p1=node(way377844704 service)；cov25=53%（way377844704 service）；grade 0.4%、demSag 0.5、crossings 空。"
+ },
+ {
+  "id": -1649,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "197 m 公路缺口两端确为真实 OSM 断头节点，但沿线 OSM 覆盖仅 14%、影像走廊与周边亮度一致看不出路迹，无法确认现实中存在可走的路。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1649_a.png（分类栅格目视：走廊多数格为 '.' 暗色，仅两端接亮带；定量：核心±5 m 平均 51.1 vs 15–30 m 背景 52.2，diff -1.1，无路脊）；p0=node(way1385691480 service)、p1=node(way342307929 residential)；有利旁证：两端属同一走廊（白哈巴村—阿克哈巴北村/阿克哈巴南村—白哈巴村公路）、坡度 8.2% 平缓、crossings 空、demSag -2.0；但无任何正面路径证据，故判 uncertain。"
+ },
+ {
+  "id": -1648,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "59 m 缺口，东端与既有 path 走向仅差 7°、25 m 内既有路覆盖 65%，两端为 OSM 节点且不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1648_a.png（分类栅格目视：上端为 '#' 建筑亮块、下端接 '+' 亮带，走廊无 'W'）；p0=node(way1318065098 service)、p1=node(way1310778881 path)，p1 处 path 方向与连线夹角 7°；cov12=36%、cov25=65%（way1310778876 path）；crossings 空、demSag -3.2。"
+ },
+ {
+  "id": -1647,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "150 m、坡度 14.7% 的公路缺口，沿线 OSM 覆盖仅 17%、影像走廊无路迹，除两端同名公路外缺少可走性证据。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1647_a.png（分类栅格目视：走廊为 '.' 暗色，两端才接 '+' 亮带；定量 core 61.3 vs 背景 60.8，diff +0.5，无路脊）；p0=node(way1318065097 service)、p1=node(way1310983290 service)、两端同名『阿克哈巴北村—白哈巴村公路』；无跨水、demSag -0.5、最大局部坡度 17.3%（非悬崖级）。既无路迹也无不可能性证据，判 uncertain。"
+ },
+ {
+  "id": -1646,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "38 m 村道缺口走廊完全落在既有 service 路上（25 m 覆盖 100%），两端为 OSM 节点、无跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1646_a.png / b2_1646_b.png（分类栅格目视：走廊为 '+' 村庄地面、无 'W'）；cov12=65%、cov25=100%（way1318065096 highway=service）；p0=node(way1318065096)、p1=node(way1318065083 path)，沿路弧长 17 m 与连线相当（非抄近道）；crossings 空。"
+ },
+ {
+  "id": -1645,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "59 m 缺口两端为同一公路的 OSM 断头节点，走廊 25 m 内既有路覆盖 68%，无跨水无沟谷。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1645_a.png（分类栅格目视：两端均落在 '+' 亮带、无 'W'）；p0=node(way1318065089 service)、p1=node(way1318065082 service)，两端同名『阿克哈巴北村—白哈巴村公路』；cov12=0%、cov25=68%（way1318065084 path）；crossings 空、demSag 0.2。"
+ },
+ {
+  "id": -1644,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "53 m 步道—公路缺口两端为 OSM 节点，走廊 25 m 内既有路覆盖 82%，不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1644_a.png（分类栅格目视：上端接 '+' 亮块、无 'W'）；p0=node(way1318065084 path)、p1=node(way1318065089 service)；cov12=46%、cov25=82%（way1318065089 service）；crossings 空、demSag 0.2。"
+ },
+ {
+  "id": -1643,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "24 m 短缺口走廊完全落在既有 path/service 路上（25 m 覆盖 100%），两端为 OSM 节点。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1643_a.png（分类栅格目视：走廊为 '+' 村庄地面、无 'W'）；cov12=48%、cov25=100%（way1318065083 highway=path）；p0=node(way1318065083 path)、p1=node(way1318065096 service)；crossings 空。"
+ },
+ {
+  "id": -1642,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "与 -1645 同一缺口的反向记录（59 m），两端为同一公路的 OSM 断头节点，走廊 25 m 内既有路覆盖 68%。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1642_a.png（分类栅格与 -1645 同位置：两端 '+' 亮带、无 'W'）；p0=node(way1318065082 service)、p1=node(way1318065089 service)，两端同名公路；cov25=68%；crossings 空。"
+ },
+ {
+  "id": -1641,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "全批最长的 216 m 公路缺口，沿线 OSM 覆盖仅 12%、影像走廊无任何路迹，两端又都斜接既有路，无法确认现实中存在这条路。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1641_a.png（分类栅格目视：走廊全程 '.' 暗色、两侧为 '+' 亮带，西侧约 50 m 有 '#' 建筑块；定量 core 69.2 vs 背景 69.6，diff -0.3，无路脊）；p0=node(way1310983295 service)、p1=node(way342307937 residential 的中间节点)；两端与连线夹角 61°/55°（不衔接）；有利旁证：两端同名『阿克哈巴北村—白哈巴村公路』、坡度 -4.1% 平缓有鞍部、crossings 空、demSag -2.4；证据不足判 uncertain。"
+ },
+ {
+  "id": -1640,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "135 m 步道—公路缺口，OSM 沿线覆盖仅 19% 且影像走廊比两侧更暗、看不到路迹，无法确认可走性。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1640_a.png（分类栅格目视：走廊多为 '.' 暗色，仅两端接亮带；定量 core 54.1 vs 背景 63.0，diff -8.9，无路脊反而更暗）；p0=node(way1310778883 path，与连线夹角 13°)、p1=node(way1310983290 service)；crossings 空、demSag -0.5、最大局部坡度 22.2%；缺正面证据判 uncertain。"
+ },
+ {
+  "id": -1639,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "7.1 m 且不跨水的极短连接，走廊 25 m 内有既有 path 覆盖 100%，按短连接规则直接 keep。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1639_a.png（分类栅格目视：两端落在 '+' 地面、紧邻 '#' 亮块，water%=0）；p0=node(way1310778883 path)、p1=node(way1310778884 path)；cov25=100%（way1310778873 service）；lenM 7.1 ≤ 10 m 且 crossings 空。"
+ },
+ {
+  "id": -1638,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "15.5 m 短缺口走廊 100% 落在既有 path/service 路上，两端为 OSM 节点、不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1638_a.png（分类栅格目视：走廊为 '+' 地面、邻 '#' 亮块，无 'W'）；cov12=100%、cov25=100%（way1310778873 highway=service）；p0=node(way1310778881 path)、p1=node(way1310778877 path)；crossings 空。"
+ },
+ {
+  "id": -1637,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "45 m 缺口两端为 OSM 断头节点，走廊 25 m 内既有路覆盖 56%，不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1637_a.png（分类栅格目视：上端接 '#'/'+' 建筑亮块、下端落 '+' 地面，water%=0）；p0=node(way1310778876 path)、p1=node(way1318065098 service)；cov12=26%、cov25=56%（way1310778876 path）；crossings 空、demSag -3.2。"
+ },
+ {
+  "id": -1636,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "209 m 步道—土路缺口沿线 OSM 覆盖仅 19%，影像走廊暗且两端斜接，无法确认中间真的有路。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1636_a.png（分类栅格目视：走廊为 '.' 暗色林地，西侧紧邻 '#'/'+' 聚落亮块；定量 core 47.9 vs 背景 48.9，diff -1.0，无路脊）；p0=node(way1297341452 footway)、p1=node(way252597988 track 的中间节点)；与连线夹角 52°/44°；有利旁证：两端属同一走廊命名（贾登峪—游服中心站步道/土路）、坡度 -7%、crossings 空、demSag 0.6、最大局部坡度 15.3%（无悬崖）；缺正面路径证据判 uncertain。"
+ },
+ {
+  "id": -1635,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "70 m 步道—公路缺口位于贾登峪建成区，影像走廊为亮色村庄地面且 core 比背景亮（diff +2.9），两端为 OSM 节点、不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1635_a.png（分类栅格目视：走廊及周边大量 '#'/'+' 亮格=建筑与空地，无 'W'；定量 core 89.2、背景 86.3）；p0=node(way1297341451 footway，与连线夹角 13°)、p1=node(way252597987 residential)；cov25=39%；crossings 空、demSag 0.7。"
+ },
+ {
+  "id": -1634,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "12 m 短缺口走廊 100% 落在既有 residential 路上，两端为 OSM 步道节点、不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1634_a.png / b2_1634_b.png（分类栅格目视：全幅为 '+' 亮色村道地面、含 '#' 建筑，water%=0）；cov12=100%、cov25=100%（way784731144 highway=residential）；p0=node(way1297341451 footway)、p1=node(way1297341452 footway)；crossings 空。"
+ },
+ {
+  "id": -1633,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "15 m 短缺口走廊被既有 footway 覆盖（12 m 容差 100%），虽靠近喀纳斯河但连线本身不压水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1633_a.png（分类栅格目视：走廊为暗色地面，'W' 水体在图幅东南约 50 m 外、不压线，water%=0）；p0=node(way1297328851 footway)、p1=node(way1297328644 footway)；cov12=100%（way1297328644 highway=footway），25 m 覆盖 100%（way1297327246）；crossings 空、parallelDup 的栈道沿路弧长 28 m vs 连线 14.6 m（偏差小，非抄近道）。"
+ },
+ {
+  "id": -1632,
+  "verdict": "drop",
+  "confidence": "high",
+  "reason": "卧龙湾处凭空跨喀纳斯河：连线 65% 落在水面、4 处跨水点 OSM 均无 bridge 标注，影像上看不到任何桥或栈道。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1632_a.png（经带标签帧目视 + 分类栅格复核：连接线从北岸经青绿色河面到南岸，water%=61–65%，走廊内无亮色桥体）；crossings 4 处（river 喀纳斯河、2×lake、lake-inside）全部 hasBridgeTag=false，nearestWays 中 way30622840 waterway=river 无 bridge、way30622735 无 bridge；ways-near 80 m 内无任何带 bridge 的跨越路；几何事实 demSag -0.4（无峡谷需桥）。"
+ },
+ {
+  "id": -1631,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "5.3 m 且不跨水的极短连接，走廊 100% 落在既有 footway 上，符合 ≤10 m 短连接规则。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1631_a.png（分类栅格目视：连线两端点在岸上暗色地面，'W' 水体在西侧约 25 m 外、不压线，water%=0）；p0=node(way1297323097 footway)、p1=node(way1297318141 footway)；cov12=cov25=100%（way1297318141）；lenM 5.3 ≤ 10 m、crossings 空。"
+ },
+ {
+  "id": -1630,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "-1631 的反向记录（5.3 m），同样不跨水且走廊 100% 在既有 footway 上。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1630_a.png（分类栅格与 -1631 同位置：水体在西侧 25 m 外、不压线）；p0=node(way1297318141 footway)、p1=node(way1297323097 footway)；cov12=cov25=100%；lenM 5.3 ≤ 10 m、crossings 空。"
+ },
+ {
+  "id": -1629,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "虽然坡度 -35.6%，但影像上走廊有明显浅色路迹、80% 落在既有主路 way80138486（铁喀段，surface=asphalt）上，不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1629_a.png / b2_1629_b.png（经带标签帧『LINK -1629』目视确认：连接线两端落在浅色路迹/裸地上，喀纳斯河在西侧约 100 m，water%=0；定量 core 109.9 vs 背景 96.2，diff +13.7）；p0=node(way1297312985 footway)、p1=node(way377844702 footway)；cov12=46%、cov25=80%（way80138486 highway=primary）；crossings 空、最大局部坡度 32.7%（未见悬崖级坡折）。"
+ },
+ {
+  "id": -1628,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "128 m 走廊 100% 落在既有 tertiary 路 way80139180 上，沿路弧长 127 m 与连线一致（不是抄近道），无跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1628_a.png（分类栅格目视：走廊有 '+' 路带、两端接亮带，无 'W'；定量 core 87.0 vs 背景 50.2，diff +36.8，明显路脊）；p0=node(way1297255336 footway)、p1=node(way1546925828 path)；沿 way80139180 弧长 127 m ÷ 连线 127.7 m = 0.99（无发夹弯被切除）；cov12=cov25=100%。"
+ },
+ {
+  "id": -1627,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "93 m 走廊 100% 落在既有 tertiary 路上，沿路弧长与连线长度比 1.00，无抄近道、无跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1627_a.png（分类栅格目视：走廊为 '+' 路带、无 'W'；定量 core 相对背景 +17 量级路脊）；p0=node(way1297255335 footway)、p1=node(way1546925828 path)；沿 way80139180 弧长 93 m ÷ 连线 93.2 m = 1.00；cov12=cov25=100%、crossings 空。"
+ },
+ {
+  "id": -1626,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "66 m 缺口一端为 footway 断头节点（与连线夹角 10° 衔接），走廊 core 比背景亮（+4.5）有路迹迹象，且 41% 落在既有 tertiary 路 25 m 内。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1626_a.png（分类栅格目视：走廊及两端多为 '+' 亮带、含 '#' 亮块，无 'W'）；p0=node(way1297255334 footway，夹角 10°)、p1=node(way589252044 highway=tertiary 的中间节点)；cov12=21%、cov25=41%；core 61.7 vs 背景 57.2（diff +4.5）；crossings 空、grade 16.8%。"
+ },
+ {
+  "id": -1625,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "58 m 缺口走廊 100% 落在既有 service 路 way377829528 上（沿路弧长 55 m≈连线），两端为栈道/步道 OSM 节点、不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1625_a.png（分类栅格目视：两端落在 '#'/'+' 建筑亮区，water%=0）；p0=node(way1297222144 footway)、p1=node(way1297255336 footway)；cov12=82%、cov25=100%（way377829528 highway=service）；沿路弧长 55 m ÷ 58 m = 0.94（非抄近道）；crossings 空。"
+ },
+ {
+  "id": -1624,
+  "verdict": "drop",
+  "confidence": "high",
+  "reason": "喀纳斯湖北端凭空跨水：连线 85% 落在河/湖水面，跨水点 OSM 无桥，最近的 boardwalk 只是两岸各自的断头栈道、没有跨到线上。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1624_a.png / b2_1624_c.png（经带标签帧『LINK -1624』目视 + 分类栅格复核：连线自北端点起几乎全程压在青绿色水面上，water%=85，走廊内无亮色桥/栈道）；crossings 3 处（river 喀纳斯河、lake、lake-inside），其中 river 与 lake-inside 的 hasBridgeTag=false；ways-near 300 m：way377828352 bridge=boardwalk 在 57 m、way1297218429 bridge=boardwalk( access=no ) 在 63 m、way1297218212 bridge=boardwalk 在 71 m，均只在两端岸边、无一条沿连线跨越；几何事实：p1=node(way377828352)，p0 距 1297218212 端节点约 17 m，两栈道端点相距约 137 m 的水面，OSM 未记录任何连接。"
+ },
+ {
+  "id": -1623,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "189 m 缺口两端走向完全衔接（1°/3°）、地形平缓，但沿线 OSM 覆盖仅 14%、影像走廊是均匀草甸看不到路迹，无法确认现实中存在可走的路。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1623_a.png（分类栅格目视：走廊全程 '.' 暗色、两侧为 '+' 亮带，water%=0；定量 core 60.0 vs 背景 60.2，diff -0.2，无路脊）；p0=node(way1296955802 footway，与连线夹角 1°)、p1=node(way329586881 residential / 与 way1546925876 path 夹角 3°)；cov12=7%、cov25=14%；有利旁证：无跨水、grade -1.1%、demSag 1.0、最大局部坡度 4.2%（全批最平缓之一）；因缺影像路迹判 uncertain。"
+ },
+ {
+  "id": -1622,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "158 m 缺口两端都近乎垂直地接到既有路上、沿线 OSM 覆盖仅 17%，影像走廊无路迹，无法确认中间真的有可走的路。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1622_a.png（分类栅格目视：走廊多为 '.' 暗色，仅两端与斜向 '+' 亮带相接，water%=0；定量 core 59.5 vs 背景 57.3，diff +2.3，路脊不显著）；p0=node(way1296955094 footway)、p1=node(way329586881 residential)；两端与连线夹角 74°/79°（不衔接）；cov12=9%、cov25=17%；有利旁证：无跨水、grade 1.1%、demSag -0.2；证据不足判 uncertain。"
+ },
+ {
+  "id": -1621,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "132 m 走廊 25 m 内被既有 residential 路完全覆盖、沿路弧长 134 m≈连线，等于沿真实公路补绘，不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1621_a.png（分类栅格目视：两端落 '+' 亮带、无 'W'）；p0=node(way1296955093 footway)、p1=node(way329586881 residential)；cov12=36%、cov25=100%（way329586881 highway=residential），沿路弧长 134 m ÷ 连线 132.2 m = 1.02（无抄近道）；crossings 空、最大局部坡度 3.0%。"
+ },
+ {
+  "id": -1620,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "147 m 走廊 100% 落在既有 residential 路上、沿路弧长 146 m≈连线，两端为 OSM 节点、不跨水。",
+  "evidence": "裁剪图 C:/Temp/kanas_qa/b2_1620_a.png（分类栅格目视：走廊贯穿 '+' 路带、两端接亮带，water%=0；定量 core 80.1 vs 背景 68.3，diff +11.8 路脊明显）；p0=node(way1296955092 footway)、p1=node(way329586881 residential)；cov12=cov25=100%，沿路弧长 146 m ÷ 146.6 m = 1.00；crossings 空、最大局部坡度 2.7%。"
+ }
+]

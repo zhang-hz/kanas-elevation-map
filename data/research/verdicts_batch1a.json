@@ -1,0 +1,114 @@
+[
+ {
+  "id": -1683,
+  "verdict": "uncertain",
+  "confidence": "low",
+  "reason": "1107米tier-2长连接穿越密林山坡，影像中无可辨识小径痕迹、两端走向非顺接，但无水无崖，证据不足以判定真伪",
+  "evidence": "裁剪图qa1a_1683_1.png：红线穿越密林山坡，走廊内无可辨识小径、画面无水体无陡崖；OSM ways-near中点600m内仅两端way 447966757/1044299594两条path（走廊内无任何路）；两端way走向与连线夹角104°/55°，非直线顺接；demSag4.1、crossings空、坡度-23.9%但DEM平滑无断崖"
+ },
+ {
+  "id": -1682,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "同一路线（加格拉克希外—那仁村庄）土路与步道两断头段之间的缓坡草地连接，无水无崖",
+  "evidence": "裁剪图qa1a_1682_1.png：红线穿越草地林地、画面无水体无陡崖；crossings空、demSag-2.4、坡度8.3%缓升；端点way 401496775/401497956分属同一路线土路与步道，走向与连线夹角110°/132°大体衔接"
+ },
+ {
+  "id": -1681,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两端为同名步道（加格拉克希外—阿克哈巴北村）的断头段，一端近直线顺接，仅跨约11米浅沟不跨水",
+  "evidence": "裁剪图qa1a_1681_1.png：林地、画面无水体；way 402895913出端与连线夹角163°近直线顺接、402895923端134°；两端均在同名步道上；demSag11.2浅沟、crossings空、坡度6.4%"
+ },
+ {
+  "id": -1680,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "跨越约45米深的干沟但沟底非湖面不跨水，两端均通往三道湾且一端近直线顺接",
+  "evidence": "裁剪图qa1a_1680_1.png：山谷林地、画面无水体；demProfile 609→564.6→700.7为单点V形沟底（非湖面平段）、demSag44.8、crossings空；end0 way 447966747与连线夹角156°顺接；坡度10.4%，沟坡约13-24%可徒步"
+ },
+ {
+  "id": -1679,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "两端为同名步道断头段，走廊为开阔草场无水无崖，下坡偏陡但DEM平滑",
+  "evidence": "裁剪图qa1a_1679_1.png：开阔浅色草场/道地段、画面无水体；两端均在'加格拉克希外—那仁村庄步道'（way 402895898/402895926），走向夹角140°/111°；crossings空、demSag7.2、坡度-24.1%但profile单调平滑"
+ },
+ {
+  "id": -1678,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "近乎直线顺接的平缓连接，同达阿克哈巴北村、步道接土路类型相容，无水无崖",
+  "evidence": "裁剪图qa1a_1678_1.png：林地与浅色坡带、画面无水体；端点way 402895923/402895932与连线夹角150°/174°（两端几乎直线顺接）；坡度2.2%平缓、demSag5.2、crossings空、len479m"
+ },
+ {
+  "id": -1677,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "同名步道两断头段以几乎直线顺接的248米短连接，无水无崖",
+  "evidence": "裁剪图qa1a_1677_1.png：草地林地、画面无水体；way 402895900/402895922与连线夹角158°/172°几乎直线顺接；两端同名'加格拉克希外—那仁村庄步道'；crossings空、demSag-4.2、len248m"
+ },
+ {
+  "id": -1676,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "190米平缓公路缺口，两端分属不同公路way非同一弯道抄近道，影像中河流在线旁未跨",
+  "evidence": "裁剪图qa1a_1676_1.png：红线在喀纳斯河蓝绿水体西侧陆地上、未跨水；p0在service way 1546925879、p1在tertiary way 252598138（不同way，非hairpin）；坡度1.8%、demSag1.8、crossings空、parallelDup空；trunk喀东线80139767在66m外未触"
+ },
+ {
+  "id": -1675,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "107米道路接步道的缺口，位于密集服务路/步道网内，不跨水",
+  "evidence": "裁剪图qa1a_1675_1.png：绿地林地、画面无水体；ways-near中点150m内17条路（最近service 12m、footway 23m，带bridge=yes的footway在124m外未跨）；crossings空、parallelDup空、demSag-3.5、坡度-8%"
+ },
+ {
+  "id": -1674,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "199米栈道接步道的缺口，与村内tertiary路相接为正常路口，无水无沟",
+  "evidence": "裁剪图qa1a_1674_1.png：村内绿地与浅色路带、画面无水体；tertiary way 589252044与线0m相接（路口junction）、primary铁喀段在143m外未跨；crossings空、demSag0.2、坡度13%、parallelDup空"
+ },
+ {
+  "id": -1673,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "53米短线连接栈道与公路，无水无沟无抄近道",
+  "evidence": "裁剪图qa1a_1673_1.png：村内绿地、红线为短段、画面无水体；len53.3m、crossings空、demSag-2.2、parallelDup空、坡度14.4%"
+ },
+ {
+  "id": -1672,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "38米短线连接栈道与公路，无水无沟",
+  "evidence": "裁剪图qa1a_1672_1.png：村内绿地与道路、画面无水体；len37.8m、crossings空、demSag-0.6、parallelDup空、坡度12.7%"
+ },
+ {
+  "id": -1671,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "208米栈道接公路的连接，沿既有service路走廊通往铁喀段路口，不跨水",
+  "evidence": "裁剪图qa1a_1671_1.png：村内绿地与道路、画面无水体；ways-near中点service way 1409132897在10m、primary铁喀段1409130195在88m且端部0m相接为路口；crossings空、demSag-0.7、parallelDup空、坡度5.1%"
+ },
+ {
+  "id": -1670,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "120米两段道路缺口，两端分属不同way（非同一弯道抄近道），不跨水",
+  "evidence": "裁剪图qa1a_1670_1.png：谷地绿地与浅色道地、画面无水体；p0在service way 1546925859、p1在unclassified way 80138481（不同way）；parallelDup空、crossings空、demSag-1.5；stream way 1409132902在125m外未跨"
+ },
+ {
+  "id": -1669,
+  "verdict": "keep",
+  "confidence": "med",
+  "reason": "72米公路接栈道的连接，喀纳斯河在63米外未跨，端点way的bridge=boardwalk为该way自身属性非本线架桥",
+  "evidence": "裁剪图qa1a_1669_1.png：红线在喀纳斯河（左侧蓝绿水体）东侧陆地上、未跨水；crossings空、waterway 30622840（喀纳斯河）在63m；p0在service way 1546925853、p1在footway way 1297218429（bridge=boardwalk, access=no）；demSag-1.2、parallelDup空"
+ },
+ {
+  "id": -1668,
+  "verdict": "keep",
+  "confidence": "high",
+  "reason": "98米两段公路缺口，两端分属service与tertiary不同way，无水无沟无抄近道",
+  "evidence": "裁剪图qa1a_1668_1.png：村内绿地、画面无水体；p0在service way 1546925848、p1在tertiary way 589252044（不同way）；parallelDup空、crossings空、demSag0.2、坡度6.3%；primary铁喀段与trunk喀东线在142m外未跨"
+ }
+]

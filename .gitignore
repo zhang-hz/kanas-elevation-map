@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 *.log
 .DS_Store
+
+data/research/s2_tiles/
+.zcodeignore

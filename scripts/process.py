@@ -34,10 +34,11 @@ SAMPLE_STEP = 6.0  # m between elevation samples along ways
 
 
 def clean_name(n):
-    """strip invisible chars and non-Chinese/Latin script tails (Kazakh/Mongolian etc.)"""
+    """strip invisible chars, emoji and non-Chinese/Latin script tails (Kazakh/Mongolian etc.)"""
     if not n:
         return ""
     n = re.sub(r"[​-‏‪-‮﻿]", "", n)
+    n = re.sub(r"[\U0001F000-\U0001FAFF☀-➿⬀-⯿️]", "", n)
     n = re.split(r"[؀-ۿݐ-ݿ᠀-᢯Ѐ-ӿ]"
                  r"[؀-ۿݐ-ݿ᠀-᢯Ѐ-ӿ\s​-‏]*", n)[0]
     return n.strip(" 	·,-—、")
@@ -451,9 +452,99 @@ def main():
                 return ed[2]
         return None
 
+    # ---- water & bridge geometry: gap links may not invent bridges ----
+    water_segs = []   # (kind, name, ax, ay, bx, by) in km plane
+    bridge_pts = []   # vertices of OSM ways tagged bridge/tunnel/ford
+    for w in ways.values():
+        t = w.get("tags", {})
+        nds = w.get("nodes") or []
+        pts = [to_km(nodes[n][0], nodes[n][1]) for n in nds if n in nodes]
+        if len(pts) < 2:
+            continue
+        if t.get("bridge") or t.get("tunnel") or t.get("ford"):
+            bridge_pts.extend(pts)
+        if t.get("waterway") in ("river", "stream", "ditch", "canal"):
+            kind = "river" if t.get("waterway") in ("river", "canal") else "stream"
+            for j in range(len(pts) - 1):
+                water_segs.append((kind, t.get("name", ""),
+                                   pts[j][0], pts[j][1], pts[j + 1][0], pts[j + 1][1]))
+        elif (t.get("natural") == "water" or t.get("water")) and nds[0] == nds[-1]:
+            for j in range(len(pts) - 1):
+                water_segs.append(("lake", t.get("name", ""),
+                                   pts[j][0], pts[j][1], pts[j + 1][0], pts[j + 1][1]))
+            water_segs.append(("lake", t.get("name", ""),
+                               pts[-1][0], pts[-1][1], pts[0][0], pts[0][1]))
+
+    ws_arr = (np.array([[s[2], s[3], s[4], s[5]] for s in water_segs], dtype=np.float64)
+              if water_segs else np.zeros((0, 4)))
+    ws_kind = [s[0] for s in water_segs]
+    br_arr = (np.array(bridge_pts, dtype=np.float64)
+              if bridge_pts else np.zeros((0, 2)))
+
+    def link_water_hit(ax, ay, bx, by):
+        """(kind, cx, cy) where the segment crosses mapped water, None if clean.
+        A crossing is clean when an OSM way tagged bridge/tunnel/ford runs
+        within 40 m of the crossing point."""
+        if not len(ws_arr):
+            return None
+        mask = ((np.minimum(ws_arr[:, 0], ws_arr[:, 2]) <= max(ax, bx)) &
+                (np.maximum(ws_arr[:, 0], ws_arr[:, 2]) >= min(ax, bx)) &
+                (np.minimum(ws_arr[:, 1], ws_arr[:, 3]) <= max(ay, by)) &
+                (np.maximum(ws_arr[:, 1], ws_arr[:, 3]) >= min(ay, by)))
+        for i in np.nonzero(mask)[0]:
+            x1, y1, x2, y2 = ws_arr[i]
+            den = (bx - ax) * (y2 - y1) - (by - ay) * (x2 - x1)
+            if abs(den) < 1e-12:
+                continue
+            t = ((x1 - ax) * (y2 - y1) - (y1 - ay) * (x2 - x1)) / den
+            u = ((x1 - ax) * (by - ay) - (y1 - ay) * (bx - ax)) / den
+            if not (0.0 <= t <= 1.0 and 0.0 <= u <= 1.0):
+                continue
+            cx, cy = ax + t * (bx - ax), ay + t * (by - ay)
+            if len(br_arr):
+                dd = np.hypot(br_arr[:, 0] - cx, br_arr[:, 1] - cy)
+                if float(dd.min()) <= 0.04:
+                    continue
+            return (ws_kind[i], cx, cy)
+        return None
+
+    def link_sag(ax, ay, bx, by, e_a, e_b):
+        """metres the DEM dips below the endpoint chord along the link (gully cut)"""
+        worst = 0.0
+        for k in range(1, 10):
+            t = k / 10.0
+            x = ax + (bx - ax) * t
+            y = ay + (by - ay) * t
+            la = y * 1000.0 / M_PER_DEG_LAT + LAT0
+            lo = x * 1000.0 / M_PER_DEG_LON + LON0
+            e = dem.sample(la, lo)
+            if not math.isfinite(e):
+                continue
+            chord = e_a + (e_b - e_a) * t
+            worst = max(worst, chord - rel(e))
+        return worst
+
+    # explicit blacklist from QA verdicts (endpoint-pair matched, either orientation)
+    bl_path = os.path.join(ROOT, "data", "research", "link_blacklist.json")
+    try:
+        with open(bl_path, encoding="utf-8") as f:
+            blacklist = json.load(f)
+    except (OSError, ValueError):
+        blacklist = []
+
+    def blacklisted(ax, ay, bx, by):
+        for b in blacklist:
+            for (px0_, py0_, px1_, py1_) in ((b["x0"], b["y0"], b["x1"], b["y1"]),
+                                             (b["x1"], b["y1"], b["x0"], b["y0"])):
+                if (math.hypot(ax - px0_, ay - py0_) < 0.03 and
+                        math.hypot(bx - px1_, by - py1_) < 0.03):
+                    return True
+        return False
+
     # Tier 1: trail continuations (fills 1-150 m mapping gaps between fragments;
     # drawn in the source way's style so trails read as continuous)
     n_t1 = 0
+    n_rej = {"self": 0, "water": 0, "sag": 0, "bl": 0}
     for i in range(len(g_nodes)):
         if deg[i] != 1:
             continue
@@ -469,6 +560,9 @@ def main():
                 continue
             if ways_out[ed[2]]["cls"] == "link":
                 continue
+            if ed[2] == src_w0:
+                n_rej["self"] += 1  # never shortcut a way's own fold/switchback
+                continue
             t, dd_km, qx, qy = proj_on_edge(px0, py0, eidx)
             dd = dd_km * 1000.0  # proj_on_edge works in km; thresholds are metres
             if dd > 220 or dd < 1:
@@ -481,6 +575,16 @@ def main():
             tln = math.hypot(tx, ty) or 1e-9
             align = abs((tx / tln) * lx + (ty / tln) * ly)
             if align < 0.35:  # target side: link must arrive roughly along the way
+                continue
+            if link_water_hit(px0, py0, qx, qy):
+                n_rej["water"] += 1  # never invent a bridge across mapped water
+                continue
+            if blacklisted(px0, py0, qx, qy):
+                n_rej["bl"] += 1  # QA verdict: this connection is not real
+                continue
+            qe = g_nodes[ed[0]][2] + (g_nodes[ed[1]][2] - g_nodes[ed[0]][2]) * t
+            if link_sag(px0, py0, qx, qy, g_nodes[i][2], qe) > 18.0:
+                n_rej["sag"] += 1  # never cut a gully the trail must detour around
                 continue
             tgt_cls = ways_out[ed[2]]["cls"]
             if src_cls == tgt_cls:
@@ -514,7 +618,9 @@ def main():
         if n_t1 >= 400:
             break
     g_edges = [e for e in g_edges if e[2] != -1]
-    print(f"tier-1 trail-continuation links: {n_t1}")
+    print(f"tier-1 trail-continuation links: {n_t1}  "
+          f"(rejected: self-shortcut {n_rej['self']}, water {n_rej['water']}, "
+          f"gully {n_rej['sag']}, blacklist {n_rej['bl']})")
 
     # Tier 2: bigger gaps between disconnected components (marked as inferred)
     parent = list(range(len(g_nodes)))
@@ -549,14 +655,27 @@ def main():
                 pairs.append((dd, a, b))
     pairs.sort()
     n_t2 = 0
+    n_rej2 = {"water": 0, "sag": 0, "bl": 0}
     for dd, a, b in pairs:
         if find(a) == find(b) or n_t2 >= 25:
+            continue
+        ax, ay = g_nodes[a][0], g_nodes[a][1]
+        bx, by = g_nodes[b][0], g_nodes[b][1]
+        if link_water_hit(ax, ay, bx, by):
+            n_rej2["water"] += 1
+            continue
+        if blacklisted(ax, ay, bx, by):
+            n_rej2["bl"] += 1
+            continue
+        if link_sag(ax, ay, bx, by, g_nodes[a][2], g_nodes[b][2]) > 30.0:
+            n_rej2["sag"] += 1
             continue
         add_link(a, b, "link", "数据缺口连接（地图数据未覆盖）")
         ra, rb = find(a), find(b)
         parent[ra] = rb
         n_t2 += 1
-    print(f"tier-2 gap links: {n_t2}")
+    print(f"tier-2 gap links: {n_t2}  (rejected: water {n_rej2['water']}, "
+          f"gully {n_rej2['sag']}, blacklist {n_rej2['bl']})")
 
     # ---- curated shuttle lines: road-preferred shortest paths on the graph ----
     SHUTTLE_PAIRS = [
@@ -900,9 +1019,11 @@ def main():
             "info": 5, "service": 6, "stay": 7, "gate": 8}
 
     def junky(n):
-        if not n or n.strip() in JUNK:
+        if not n:
             return True
-        low = n.strip().lower()
+        low = clean_name(n).strip().lower()
+        if low in {j.lower() for j in JUNK}:
+            return True
         return low.startswith("static") or low in ("view", "dock", "closed")
 
     def compass(dx, dy):

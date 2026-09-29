@@ -1,0 +1,3364 @@
+[
+ {
+  "id": -1587,
+  "tier": 1,
+  "cls": "track",
+  "name": "铁热克提村—铁热克提乡土路",
+  "lenM": 107.5,
+  "e": [
+   -364.6,
+   -366.6
+  ],
+  "gradePct": -1.9,
+  "p0": {
+   "x": -28.9141,
+   "y": -25.2832,
+   "lat": 48.472641,
+   "lon": 86.707199,
+   "elev": -364.6
+  },
+  "p1": {
+   "x": -29.02,
+   "y": -25.3018,
+   "lat": 48.472474,
+   "lon": 86.705761,
+   "elev": -366.6
+  },
+  "demProfile": [
+   -364.6,
+   -364.4,
+   -364.2,
+   -364.1,
+   -364.1,
+   -364,
+   -364,
+   -363.9,
+   -363.9,
+   -363.8,
+   -363.7,
+   -363.7,
+   -363.6,
+   -363.5,
+   -363.4,
+   -363.6,
+   -364,
+   -364.4,
+   -364.8,
+   -365.4,
+   -365.9
+  ],
+  "demMin": -365.9,
+  "demMax": -363.4,
+  "demSag": -0.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 456300901,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "铁热克提村—铁热克提乡土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "铁热克提村—铁热克提乡土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "铁热克提村—铁热克提乡土路",
+   "cls": "track",
+   "d0m": 0,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48552_22652",
+    "have": false
+   },
+   {
+    "tile": "16_48552_22652",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1586,
+  "tier": 1,
+  "cls": "track",
+  "name": "铁热克提乡—铁热克提村土路",
+  "lenM": 216,
+  "e": [
+   -568,
+   -547.7
+  ],
+  "gradePct": 9.4,
+  "p0": {
+   "x": -33.9792,
+   "y": -27.4242,
+   "lat": 48.453388,
+   "lon": 86.638389,
+   "elev": -568
+  },
+  "p1": {
+   "x": -33.7654,
+   "y": -27.4551,
+   "lat": 48.45311,
+   "lon": 86.641294,
+   "elev": -547.7
+  },
+  "demProfile": [
+   -567.5,
+   -566.9,
+   -566.2,
+   -565.6,
+   -564.9,
+   -564.2,
+   -563.6,
+   -563.2,
+   -562.8,
+   -562.5,
+   -562.3,
+   -562.1,
+   -561.3,
+   -559.7,
+   -558.1,
+   -556.6,
+   -555.2,
+   -553.9,
+   -552.3,
+   -550.4,
+   -548.7
+  ],
+  "demMin": -567.5,
+  "demMax": -548.7,
+  "demSag": -0.5,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 456300897,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "铁热克提乡—铁热克提村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "铁热克提乡—铁热克提村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "铁热克提乡—铁热克提村土路",
+   "cls": "track",
+   "d0m": 0,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48540_22657",
+    "have": false
+   },
+   {
+    "tile": "16_48540_22657",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1585,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—吐鲁克步道",
+  "lenM": 78.6,
+  "e": [
+   384.2,
+   376.9
+  ],
+  "gradePct": -9.3,
+  "p0": {
+   "x": -11.3083,
+   "y": 9.5874,
+   "lat": 48.786215,
+   "lon": 86.946376,
+   "elev": 384.2
+  },
+  "p1": {
+   "x": -11.2813,
+   "y": 9.6612,
+   "lat": 48.786878,
+   "lon": 86.946742,
+   "elev": 376.9
+  },
+  "demProfile": [
+   383.7,
+   383.1,
+   382.4,
+   381.7,
+   381,
+   380.4,
+   379.7,
+   379.6,
+   379.5,
+   379.4,
+   379.3,
+   379.2,
+   379.2,
+   379.1,
+   379,
+   378.9,
+   378.9,
+   378.8,
+   378.7,
+   378.7,
+   378.7
+  ],
+  "demMin": 378.7,
+  "demMax": 383.7,
+  "demSag": -1.8,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 30622550,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 453472466,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "一道湾停车场站—观鱼台步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—吐鲁克土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "加格拉克希外—吐鲁克土路",
+   "cls": "track",
+   "d0m": 2,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48596_22565",
+    "have": false
+   },
+   {
+    "tile": "16_48596_22565",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1584,
+  "tier": 1,
+  "cls": "path",
+  "name": "喀纳斯湖—三道湾步道",
+  "lenM": 89.2,
+  "e": [
+   726.9,
+   744.6
+  ],
+  "gradePct": 19.8,
+  "p0": {
+   "x": -2.2243,
+   "y": 9.6343,
+   "lat": 48.786636,
+   "lon": 87.069783,
+   "elev": 726.9
+  },
+  "p1": {
+   "x": -2.1595,
+   "y": 9.6956,
+   "lat": 48.787188,
+   "lon": 87.070663,
+   "elev": 744.6
+  },
+  "demProfile": [
+   729,
+   730,
+   730.9,
+   731.9,
+   732.9,
+   733.9,
+   734.8,
+   735.8,
+   736.6,
+   737.3,
+   738,
+   738.7,
+   739.4,
+   740.1,
+   740.7,
+   741.4,
+   742.1,
+   742.7,
+   743.4,
+   744.1,
+   744.7
+  ],
+  "demMin": 729,
+  "demMax": 744.7,
+  "demSag": -2.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 447966751,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 447966756,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "喀纳斯湖—三道湾步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "喀纳斯湖—三道湾步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48618_22565",
+    "have": false
+   },
+   {
+    "tile": "16_48618_22565",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1583,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—那仁村庄步道",
+  "lenM": 122.6,
+  "e": [
+   -14.6,
+   -38.8
+  ],
+  "gradePct": -19.7,
+  "p0": {
+   "x": -32.3308,
+   "y": 16.9014,
+   "lat": 48.851986,
+   "lon": 86.660783,
+   "elev": -14.6
+  },
+  "p1": {
+   "x": -32.296,
+   "y": 17.019,
+   "lat": 48.853043,
+   "lon": 86.661256,
+   "elev": -38.8
+  },
+  "demProfile": [
+   -14.7,
+   -15.4,
+   -16.2,
+   -16.9,
+   -17.7,
+   -18.4,
+   -19.2,
+   -20,
+   -20.8,
+   -21.5,
+   -22.3,
+   -23.3,
+   -25.2,
+   -27,
+   -28.8,
+   -30.6,
+   -32.4,
+   -34,
+   -35.7,
+   -37.3,
+   -38.9
+  ],
+  "demMin": -38.9,
+  "demMax": -14.7,
+  "demSag": 0.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402895921,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 402895922,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—那仁村庄步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—那仁村庄步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48544_22547",
+    "have": false
+   },
+   {
+    "tile": "16_48544_22547",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1582,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—阿克哈巴北村步道",
+  "lenM": 80.8,
+  "e": [
+   53,
+   79
+  ],
+  "gradePct": 32.2,
+  "p0": {
+   "x": -30.5088,
+   "y": 14.3237,
+   "lat": 48.828806,
+   "lon": 86.685535,
+   "elev": 53
+  },
+  "p1": {
+   "x": -30.4346,
+   "y": 14.2917,
+   "lat": 48.828518,
+   "lon": 86.686543,
+   "elev": 79
+  },
+  "demProfile": [
+   56,
+   57.3,
+   58.4,
+   59.4,
+   60.4,
+   61.4,
+   62.3,
+   63.3,
+   64.3,
+   65.3,
+   66.3,
+   67.2,
+   68.3,
+   69.3,
+   70.3,
+   71.3,
+   72.3,
+   73.4,
+   74.4,
+   75.5,
+   76.6
+  ],
+  "demMin": 56,
+  "demMax": 76.6,
+  "demSag": -3,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402895897,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 402895920,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—阿克哈巴北村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—阿克哈巴北村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48548_22553",
+    "have": false
+   },
+   {
+    "tile": "16_48548_22554",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1581,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—阿克哈巴北村步道",
+  "lenM": 177.9,
+  "e": [
+   -40.2,
+   -4.9
+  ],
+  "gradePct": 19.8,
+  "p0": {
+   "x": -32.2273,
+   "y": 16.5342,
+   "lat": 48.848684,
+   "lon": 86.662189,
+   "elev": -40.2
+  },
+  "p1": {
+   "x": -32.1917,
+   "y": 16.7085,
+   "lat": 48.850251,
+   "lon": 86.662673,
+   "elev": -4.9
+  },
+  "demProfile": [
+   -34.4,
+   -34.4,
+   -34.5,
+   -34.8,
+   -35.1,
+   -35.5,
+   -36,
+   -34.1,
+   -32.1,
+   -29.9,
+   -27.6,
+   -25.4,
+   -23.2,
+   -21,
+   -18.8,
+   -16.7,
+   -14.5,
+   -12.3,
+   -10,
+   -7.8,
+   -5.5
+  ],
+  "demMin": -36,
+  "demMax": -5.5,
+  "demSag": -4.2,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402895916,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 402895922,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—阿克哈巴北村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—那仁村庄步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48544_22548",
+    "have": false
+   },
+   {
+    "tile": "16_48544_22548",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1580,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—那仁村庄步道",
+  "lenM": 50.7,
+  "e": [
+   536.1,
+   542.4
+  ],
+  "gradePct": 12.4,
+  "p0": {
+   "x": -33.575,
+   "y": 24.165,
+   "lat": 48.917304,
+   "lon": 86.643881,
+   "elev": 536.1
+  },
+  "p1": {
+   "x": -33.6129,
+   "y": 24.1987,
+   "lat": 48.917607,
+   "lon": 86.643366,
+   "elev": 542.4
+  },
+  "demProfile": [
+   532.6,
+   533.1,
+   533.6,
+   534,
+   534.5,
+   535,
+   535.4,
+   535.9,
+   536.4,
+   536.8,
+   537.3,
+   537.8,
+   538.2,
+   538.7,
+   539.1,
+   539.5,
+   539.9,
+   540.2,
+   540.5,
+   540.9,
+   541.2
+  ],
+  "demMin": 532.6,
+  "demMax": 541.2,
+  "demSag": 3.5,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402895898,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 402895906,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 402895929,
+    "distM": 12,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—那仁村庄步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "那仁村庄—加格拉克希外步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "那仁村庄—加格拉克希外步道",
+   "cls": "path",
+   "d0m": 23,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48541_22529",
+    "have": false
+   },
+   {
+    "tile": "16_48540_22529",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1579,
+  "tier": 1,
+  "cls": "track",
+  "name": "白哈巴村—阿克哈巴南村土路",
+  "lenM": 49,
+  "e": [
+   -57.1,
+   -59.8
+  ],
+  "gradePct": -5.5,
+  "p0": {
+   "x": -31.9856,
+   "y": 2.6751,
+   "lat": 48.724056,
+   "lon": 86.665473,
+   "elev": -57.1
+  },
+  "p1": {
+   "x": -32.0271,
+   "y": 2.7011,
+   "lat": 48.72429,
+   "lon": 86.664909,
+   "elev": -59.8
+  },
+  "demProfile": [
+   -58.9,
+   -59,
+   -59.1,
+   -59.2,
+   -59.3,
+   -59.4,
+   -59.5,
+   -59.7,
+   -59.8,
+   -60,
+   -60.1,
+   -60.3,
+   -60.4,
+   -60.6,
+   -60.7,
+   -60.9,
+   -61.1,
+   -61.3,
+   -61.5,
+   -61.7,
+   -61.9
+  ],
+  "demMin": -61.9,
+  "demMax": -58.9,
+  "demSag": 2.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402029773,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 402029779,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 401028081,
+    "distM": 49,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   }
+  ],
+  "end0Way": {
+   "name": "白哈巴村—阿克哈巴北村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "白哈巴村—阿克哈巴南村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48544_22582",
+    "have": false
+   },
+   {
+    "tile": "16_48544_22582",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1578,
+  "tier": 1,
+  "cls": "track",
+  "name": "白哈巴村—阿克哈巴北村土路",
+  "lenM": 48.3,
+  "e": [
+   -57.7,
+   -62.4
+  ],
+  "gradePct": -9.7,
+  "p0": {
+   "x": -30.3722,
+   "y": 2.2432,
+   "lat": 48.720172,
+   "lon": 86.687391,
+   "elev": -57.7
+  },
+  "p1": {
+   "x": -30.4134,
+   "y": 2.218,
+   "lat": 48.719945,
+   "lon": 86.686831,
+   "elev": -62.4
+  },
+  "demProfile": [
+   -58.7,
+   -58.7,
+   -58.8,
+   -58.8,
+   -58.8,
+   -58.9,
+   -58.9,
+   -59,
+   -59.1,
+   -59.1,
+   -59.2,
+   -59.3,
+   -59.4,
+   -59.5,
+   -59.7,
+   -59.9,
+   -60,
+   -60.2,
+   -60.4,
+   -60.6,
+   -60.7
+  ],
+  "demMin": -60.7,
+  "demMax": -58.7,
+  "demSag": -1.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 401028081,
+    "distM": 0,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   },
+   {
+    "osmId": 402029765,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "白哈巴村—阿克哈巴北村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "白哈巴村—阿克哈巴北村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "白哈巴村—阿克哈巴北村土路",
+   "cls": "track",
+   "d0m": 0,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48548_22583",
+    "have": false
+   },
+   {
+    "tile": "16_48548_22584",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1577,
+  "tier": 1,
+  "cls": "track",
+  "name": "阿克哈巴南村—白哈巴村土路",
+  "lenM": 201,
+  "e": [
+   19.6,
+   9.7
+  ],
+  "gradePct": -4.9,
+  "p0": {
+   "x": -31.6014,
+   "y": 1.4328,
+   "lat": 48.712884,
+   "lon": 86.670692,
+   "elev": 19.6
+  },
+  "p1": {
+   "x": -31.7854,
+   "y": 1.3519,
+   "lat": 48.712157,
+   "lon": 86.668192,
+   "elev": 9.7
+  },
+  "demProfile": [
+   17.5,
+   16.2,
+   14.9,
+   13.5,
+   12,
+   10.6,
+   9.2,
+   8.4,
+   7.9,
+   7.6,
+   7.4,
+   7.3,
+   7.2,
+   7.1,
+   7,
+   7.1,
+   7.2,
+   7.5,
+   7.9,
+   8.6,
+   9.3
+  ],
+  "demMin": 7,
+  "demMax": 17.5,
+  "demSag": 2.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 402029759,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 402029784,
+    "distM": 39,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "阿克哈巴南村—白哈巴村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "阿克哈巴南村—白哈巴村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "阿克哈巴南村—白哈巴村土路",
+   "cls": "track",
+   "d0m": 0,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48545_22585",
+    "have": false
+   },
+   {
+    "tile": "16_48545_22586",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1576,
+  "tier": 1,
+  "cls": "path",
+  "name": "加格拉克希外—阿克哈巴北村步道",
+  "lenM": 157.1,
+  "e": [
+   -232.3,
+   -226.9
+  ],
+  "gradePct": 3.4,
+  "p0": {
+   "x": -37.6142,
+   "y": 16.8388,
+   "lat": 48.851423,
+   "lon": 86.589008,
+   "elev": -232.3
+  },
+  "p1": {
+   "x": -37.4687,
+   "y": 16.898,
+   "lat": 48.851955,
+   "lon": 86.590984,
+   "elev": -226.9
+  },
+  "demProfile": [
+   -233,
+   -232.7,
+   -232.4,
+   -232.1,
+   -231.7,
+   -231.4,
+   -231,
+   -230.7,
+   -230.5,
+   -230.2,
+   -230,
+   -229.8,
+   -229.7,
+   -229.6,
+   -229.3,
+   -229.1,
+   -228.8,
+   -228.5,
+   -228.2,
+   -227.9,
+   -227.6
+  ],
+  "demMin": -233,
+  "demMax": -227.6,
+  "demSag": 0.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 401347436,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 401497955,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—阿克哈巴北村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—那仁村庄土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48531_22547",
+    "have": false
+   },
+   {
+    "tile": "16_48531_22547",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1575,
+  "tier": 1,
+  "cls": "track",
+  "name": "加格拉克希外—阿克哈巴北村土路",
+  "lenM": 157.1,
+  "e": [
+   -226.9,
+   -232.3
+  ],
+  "gradePct": -3.4,
+  "p0": {
+   "x": -37.4687,
+   "y": 16.898,
+   "lat": 48.851955,
+   "lon": 86.590984,
+   "elev": -226.9
+  },
+  "p1": {
+   "x": -37.6142,
+   "y": 16.8388,
+   "lat": 48.851423,
+   "lon": 86.589008,
+   "elev": -232.3
+  },
+  "demProfile": [
+   -227.6,
+   -227.9,
+   -228.2,
+   -228.5,
+   -228.8,
+   -229.1,
+   -229.3,
+   -229.6,
+   -229.7,
+   -229.8,
+   -230,
+   -230.2,
+   -230.5,
+   -230.7,
+   -231,
+   -231.4,
+   -231.7,
+   -232.1,
+   -232.4,
+   -232.7,
+   -233
+  ],
+  "demMin": -233,
+  "demMax": -227.6,
+  "demSag": 0.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 401347436,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 401497955,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   }
+  ],
+  "end0Way": {
+   "name": "加格拉克希外—那仁村庄土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "加格拉克希外—阿克哈巴北村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48531_22547",
+    "have": false
+   },
+   {
+    "tile": "16_48531_22547",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1574,
+  "tier": 1,
+  "cls": "track",
+  "name": "阿克哈巴南村—白哈巴村土路",
+  "lenM": 159.9,
+  "e": [
+   -191.2,
+   -198.1
+  ],
+  "gradePct": -4.3,
+  "p0": {
+   "x": -34.2218,
+   "y": 2.7133,
+   "lat": 48.724399,
+   "lon": 86.635094,
+   "elev": -191.2
+  },
+  "p1": {
+   "x": -34.1855,
+   "y": 2.869,
+   "lat": 48.725799,
+   "lon": 86.635587,
+   "elev": -198.1
+  },
+  "demProfile": [
+   -186.9,
+   -188.7,
+   -190.5,
+   -191.4,
+   -192.2,
+   -193,
+   -193.8,
+   -194.6,
+   -195.3,
+   -196.1,
+   -196.9,
+   -197.1,
+   -197.1,
+   -197.1,
+   -197.2,
+   -197.3,
+   -197.5,
+   -197.6,
+   -197.8,
+   -197.8,
+   -197.8
+  ],
+  "demMin": -197.8,
+  "demMax": -186.9,
+  "demSag": -0.3,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 400637269,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 401028104,
+    "distM": 0,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   }
+  ],
+  "end0Way": {
+   "name": "阿克哈巴南村—白哈巴村土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "阿克哈巴南村—白哈巴村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48539_22582",
+    "have": false
+   },
+   {
+    "tile": "16_48539_22582",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1573,
+  "tier": 1,
+  "cls": "road",
+  "name": "喀纳斯—喀纳斯新村公路",
+  "lenM": 82.5,
+  "e": [
+   -120.8,
+   -117.5
+  ],
+  "gradePct": 4,
+  "p0": {
+   "x": -5.7332,
+   "y": -3.0984,
+   "lat": 48.672138,
+   "lon": 87.022114,
+   "elev": -120.8
+  },
+  "p1": {
+   "x": -5.6537,
+   "y": -3.0763,
+   "lat": 48.672336,
+   "lon": 87.023194,
+   "elev": -117.5
+  },
+  "demProfile": [
+   -121.4,
+   -121.3,
+   -121.3,
+   -121.2,
+   -121.1,
+   -121.1,
+   -121,
+   -120.9,
+   -120.9,
+   -120.8,
+   -120.7,
+   -120.6,
+   -120.5,
+   -120.4,
+   -120.3,
+   -120.2,
+   -120,
+   -119.9,
+   -119.7,
+   -119.6,
+   -119.4
+  ],
+  "demMin": -121.4,
+  "demMax": -119.4,
+  "demSag": 0.6,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377844704,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 30622735,
+    "distM": 9,
+    "cls": "other",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   },
+   {
+    "osmId": 30622840,
+    "distM": 62,
+    "cls": "waterway:river",
+    "name": "喀纳斯河 قاناس وزەنى",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   }
+  ],
+  "end0Way": {
+   "name": "喀纳斯—喀纳斯新村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "喀纳斯—喀纳斯新村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "喀纳斯—喀纳斯新村公路",
+   "cls": "road",
+   "d0m": 0,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48609_22597",
+    "have": false
+   },
+   {
+    "tile": "16_48610_22597",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1572,
+  "tier": 1,
+  "cls": "path",
+  "name": "月亮湾—月亮湾站步道",
+  "lenM": 62.5,
+  "e": [
+   -36.8,
+   -6.8
+  ],
+  "gradePct": 48,
+  "p0": {
+   "x": -3.9459,
+   "y": -7.3114,
+   "lat": 48.634252,
+   "lon": 87.046395,
+   "elev": -36.8
+  },
+  "p1": {
+   "x": -3.8859,
+   "y": -7.329,
+   "lat": 48.634094,
+   "lon": 87.04721,
+   "elev": -6.8
+  },
+  "demProfile": [
+   -34.7,
+   -33.5,
+   -32.3,
+   -31.1,
+   -29.9,
+   -28.7,
+   -27.5,
+   -26.3,
+   -25.2,
+   -24,
+   -22.8,
+   -21.7,
+   -20.5,
+   -19.2,
+   -17.7,
+   -16.2,
+   -14.8,
+   -13.3,
+   -11.8,
+   -10.4,
+   -8.9
+  ],
+  "demMin": -34.7,
+  "demMax": -8.9,
+  "demSag": -2.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377844702,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 614666110,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 1297314299,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 1297314300,
+    "distM": 0,
+    "cls": "steps",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "steps"
+   },
+   {
+    "osmId": 80138486,
+    "distM": 4,
+    "cls": "primary",
+    "name": "铁喀段",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "asphalt",
+    "highway": "primary"
+   },
+   {
+    "osmId": 1422633702,
+    "distM": 12,
+    "cls": "steps",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "steps"
+   },
+   {
+    "osmId": 1422633701,
+    "distM": 38,
+    "cls": "steps",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "steps"
+   },
+   {
+    "osmId": 1297312984,
+    "distM": 64,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "yes",
+    "surface": "",
+    "highway": "footway"
+   }
+  ],
+  "end0Way": {
+   "name": "喀纳斯—喀纳斯老村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "卧龙湾—卧龙湾站步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48614_22607",
+    "have": false
+   },
+   {
+    "tile": "16_48614_22607",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1571,
+  "tier": 1,
+  "cls": "path",
+  "name": "吐鲁克—喀纳斯老村步道",
+  "lenM": 165.4,
+  "e": [
+   -71.2,
+   -91.7
+  ],
+  "gradePct": -12.4,
+  "p0": {
+   "x": -5.4391,
+   "y": 1.4129,
+   "lat": 48.712705,
+   "lon": 87.026109,
+   "elev": -71.2
+  },
+  "p1": {
+   "x": -5.4888,
+   "y": 1.5707,
+   "lat": 48.714125,
+   "lon": 87.025434,
+   "elev": -91.7
+  },
+  "demProfile": [
+   -71.2,
+   -72.8,
+   -74.4,
+   -76,
+   -77.6,
+   -79.2,
+   -80.7,
+   -82.3,
+   -83.5,
+   -84.6,
+   -85.7,
+   -86.7,
+   -87.6,
+   -88.5,
+   -89.4,
+   -90.2,
+   -90.5,
+   -90.8,
+   -91.1,
+   -91.4,
+   -91.6
+  ],
+  "demMin": -91.6,
+  "demMax": -71.2,
+  "demSag": -0.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377827597,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "boardwalk",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377829532,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 1296584253,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 30622734,
+    "distM": 42,
+    "cls": "other",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   },
+   {
+    "osmId": 377826406,
+    "distM": 62,
+    "cls": "footway",
+    "name": "",
+    "bridge": "boardwalk",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377827602,
+    "distM": 62,
+    "cls": "footway",
+    "name": "",
+    "bridge": "yes",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村栈道",
+   "cls": "boardwalk",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村栈道",
+   "cls": "boardwalk",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48610_22586",
+    "have": false
+   },
+   {
+    "tile": "16_48610_22585",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1570,
+  "tier": 1,
+  "cls": "path",
+  "name": "吐鲁克—喀纳斯老村步道",
+  "lenM": 207.8,
+  "e": [
+   -90.8,
+   -88.6
+  ],
+  "gradePct": 1.1,
+  "p0": {
+   "x": -6.235,
+   "y": 1.7219,
+   "lat": 48.715484,
+   "lon": 87.015297,
+   "elev": -90.8
+  },
+  "p1": {
+   "x": -6.119,
+   "y": 1.5495,
+   "lat": 48.713934,
+   "lon": 87.016873,
+   "elev": -88.6
+  },
+  "demProfile": [
+   -90.7,
+   -91.1,
+   -91.4,
+   -91.6,
+   -91.8,
+   -91.9,
+   -91.9,
+   -91.9,
+   -91.7,
+   -91.5,
+   -91.4,
+   -91.3,
+   -91.1,
+   -90.9,
+   -90.7,
+   -90.2,
+   -89.6,
+   -89.3,
+   -89.1,
+   -89.2,
+   -89.5
+  ],
+  "demMin": -91.9,
+  "demMax": -89.1,
+  "demSag": 1.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377828352,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "boardwalk",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377828353,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377828553,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 30622734,
+    "distM": 7,
+    "cls": "other",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   },
+   {
+    "osmId": 377823014,
+    "distM": 45,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 1546925874,
+    "distM": 62,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377828552,
+    "distM": 71,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   },
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1569,
+  "tier": 1,
+  "cls": "path",
+  "name": "吐鲁克—喀纳斯老村步道",
+  "lenM": 183.2,
+  "e": [
+   -52.8,
+   -4.9
+  ],
+  "gradePct": 26.1,
+  "p0": {
+   "x": -6.1942,
+   "y": 4.3099,
+   "lat": 48.738757,
+   "lon": 87.015851,
+   "elev": -52.8
+  },
+  "p1": {
+   "x": -6.0171,
+   "y": 4.263,
+   "lat": 48.738335,
+   "lon": 87.018257,
+   "elev": -4.9
+  },
+  "demProfile": [
+   -49.3,
+   -47.3,
+   -45.2,
+   -43.2,
+   -41.3,
+   -39.2,
+   -37.2,
+   -35,
+   -32.8,
+   -30.5,
+   -28.3,
+   -26,
+   -23.8,
+   -21.6,
+   -19.4,
+   -17.2,
+   -15.5,
+   -14.3,
+   -13.2,
+   -12.2,
+   -11.2
+  ],
+  "demMin": -49.3,
+  "demMax": -11.2,
+  "demSag": -3.5,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377826408,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377826409,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "boardwalk",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 30622734,
+    "distM": 6,
+    "cls": "other",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村栈道",
+   "cls": "boardwalk",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48608_22578",
+    "have": false
+   },
+   {
+    "tile": "16_48609_22578",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1568,
+  "tier": 1,
+  "cls": "road",
+  "name": "吐鲁克—喀纳斯老村公路",
+  "lenM": 205.2,
+  "e": [
+   -74.6,
+   -92.8
+  ],
+  "gradePct": -8.9,
+  "p0": {
+   "x": -5.1704,
+   "y": 1.6332,
+   "lat": 48.714687,
+   "lon": 87.02976,
+   "elev": -74.6
+  },
+  "p1": {
+   "x": -5.3711,
+   "y": 1.676,
+   "lat": 48.715071,
+   "lon": 87.027033,
+   "elev": -92.8
+  },
+  "demProfile": [
+   -72.8,
+   -74,
+   -75.1,
+   -76.2,
+   -77.3,
+   -78.4,
+   -79.6,
+   -80.6,
+   -81.6,
+   -82.5,
+   -83.5,
+   -84.5,
+   -85.4,
+   -86.3,
+   -87.1,
+   -88,
+   -88.8,
+   -89.6,
+   -90.4,
+   -91.2,
+   -91.5
+  ],
+  "demMin": -91.5,
+  "demMax": -72.8,
+  "demSag": -1.3,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377825853,
+    "distM": 0,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   },
+   {
+    "osmId": 377827597,
+    "distM": 0,
+    "cls": "footway",
+    "name": "",
+    "bridge": "boardwalk",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 30622734,
+    "distM": 67,
+    "cls": "other",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村栈道",
+   "cls": "boardwalk",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48611_22585",
+    "have": false
+   },
+   {
+    "tile": "16_48610_22585",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1567,
+  "tier": 1,
+  "cls": "road",
+  "name": "吐鲁克—喀纳斯老村公路",
+  "lenM": 51,
+  "e": [
+   -82.8,
+   -75.5
+  ],
+  "gradePct": 14.3,
+  "p0": {
+   "x": -6.2495,
+   "y": 1.5807,
+   "lat": 48.714214,
+   "lon": 87.0151,
+   "elev": -82.8
+  },
+  "p1": {
+   "x": -6.2357,
+   "y": 1.5316,
+   "lat": 48.713773,
+   "lon": 87.015287,
+   "elev": -75.5
+  },
+  "demProfile": [
+   -82.6,
+   -82.3,
+   -82,
+   -81.7,
+   -81.4,
+   -81.1,
+   -80.8,
+   -80.4,
+   -80,
+   -79.6,
+   -79.2,
+   -78.8,
+   -78.4,
+   -78.1,
+   -77.7,
+   -77.3,
+   -76.9,
+   -76.5,
+   -76.1,
+   -75.8,
+   -75.5
+  ],
+  "demMin": -82.6,
+  "demMax": -75.5,
+  "demSag": -0.2,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377823015,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377823017,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 1546925874,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377823016,
+    "distM": 41,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377828354,
+    "distM": 54,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 252598138,
+    "distM": 61,
+    "cls": "tertiary",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "tertiary"
+   },
+   {
+    "osmId": 1546925880,
+    "distM": 74,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "d0m": 20,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   },
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1566,
+  "tier": 1,
+  "cls": "road",
+  "name": "吐鲁克—喀纳斯老村公路",
+  "lenM": 65.9,
+  "e": [
+   -84,
+   -78.5
+  ],
+  "gradePct": 8.3,
+  "p0": {
+   "x": -6.1287,
+   "y": 1.5052,
+   "lat": 48.713535,
+   "lon": 87.016741,
+   "elev": -84
+  },
+  "p1": {
+   "x": -6.1861,
+   "y": 1.5376,
+   "lat": 48.713827,
+   "lon": 87.015961,
+   "elev": -78.5
+  },
+  "demProfile": [
+   -81.6,
+   -81.5,
+   -81.3,
+   -81.2,
+   -81,
+   -80.9,
+   -80.8,
+   -80.7,
+   -80.6,
+   -80.4,
+   -80.3,
+   -80.2,
+   -80.1,
+   -80,
+   -79.9,
+   -79.9,
+   -79.8,
+   -79.7,
+   -79.5,
+   -79.5,
+   -79.6
+  ],
+  "demMin": -81.6,
+  "demMax": -79.5,
+  "demSag": -2.4,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 377823014,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 1546925874,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377828553,
+    "distM": 12,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377828552,
+    "distM": 32,
+    "cls": "footway",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "footway"
+   },
+   {
+    "osmId": 377823015,
+    "distM": 42,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377823008,
+    "distM": 73,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377823017,
+    "distM": 77,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   },
+   {
+    "tile": "16_48608_22585",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1565,
+  "tier": 1,
+  "cls": "road",
+  "name": "白哈巴村—阿克哈巴北村公路",
+  "lenM": 143.2,
+  "e": [
+   -187.3,
+   -183.8
+  ],
+  "gradePct": 2.4,
+  "p0": {
+   "x": -23.0144,
+   "y": -0.8407,
+   "lat": 48.69244,
+   "lon": 86.787347,
+   "elev": -187.3
+  },
+  "p1": {
+   "x": -23.0453,
+   "y": -0.9805,
+   "lat": 48.691183,
+   "lon": 86.786927,
+   "elev": -183.8
+  },
+  "demProfile": [
+   -186.4,
+   -186.4,
+   -186.4,
+   -186.4,
+   -186.4,
+   -186.5,
+   -186.5,
+   -186.5,
+   -186.6,
+   -186.6,
+   -186.5,
+   -186.5,
+   -186.5,
+   -186.1,
+   -185.8,
+   -185.5,
+   -185.2,
+   -184.8,
+   -184.5,
+   -184.2,
+   -183.9
+  ],
+  "demMin": -186.6,
+  "demMax": -183.9,
+  "demSag": -0.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 80139160,
+    "distM": 0,
+    "cls": "tertiary",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "tertiary"
+   },
+   {
+    "osmId": 342307939,
+    "distM": 0,
+    "cls": "residential",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "residential"
+   },
+   {
+    "osmId": 448067397,
+    "distM": 38,
+    "cls": "waterway:stream",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   }
+  ],
+  "end0Way": {
+   "name": "阿克哈巴北村—白哈巴村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "白哈巴村—阿克哈巴北村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48567_22591",
+    "have": false
+   },
+   {
+    "tile": "16_48567_22591",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1564,
+  "tier": 1,
+  "cls": "road",
+  "name": "白哈巴村—阿克哈巴南村公路",
+  "lenM": 208.5,
+  "e": [
+   -197,
+   -217.8
+  ],
+  "gradePct": -10,
+  "p0": {
+   "x": -23.5831,
+   "y": -0.9887,
+   "lat": 48.691109,
+   "lon": 86.779621,
+   "elev": -197
+  },
+  "p1": {
+   "x": -23.6525,
+   "y": -0.7921,
+   "lat": 48.692877,
+   "lon": 86.778679,
+   "elev": -217.8
+  },
+  "demProfile": [
+   -194.7,
+   -196.5,
+   -198.1,
+   -199.8,
+   -201.4,
+   -203,
+   -204.5,
+   -205.7,
+   -206.5,
+   -207.5,
+   -208.5,
+   -209.6,
+   -210.4,
+   -211.3,
+   -212.1,
+   -213,
+   -213.9,
+   -214.9,
+   -216,
+   -217.1,
+   -218
+  ],
+  "demMin": -218,
+  "demMax": -194.7,
+  "demSag": 0.2,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 342307929,
+    "distM": 0,
+    "cls": "residential",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "residential"
+   },
+   {
+    "osmId": 1385691480,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 1282496103,
+    "distM": 56,
+    "cls": "residential",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "residential"
+   },
+   {
+    "osmId": 252598145,
+    "distM": 60,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   }
+  ],
+  "end0Way": {
+   "name": "阿克哈巴南村—白哈巴村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "白哈巴村—阿克哈巴北村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48565_22591",
+    "have": false
+   },
+   {
+    "tile": "16_48565_22591",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1563,
+  "tier": 1,
+  "cls": "path",
+  "name": "吐鲁克—喀纳斯新村步道",
+  "lenM": 21.6,
+  "e": [
+   512.8,
+   519
+  ],
+  "gradePct": 28.7,
+  "p0": {
+   "x": -8.1134,
+   "y": 2.9297,
+   "lat": 48.726345,
+   "lon": 86.989779,
+   "elev": 512.8
+  },
+  "p1": {
+   "x": -8.135,
+   "y": 2.9299,
+   "lat": 48.726347,
+   "lon": 86.989485,
+   "elev": 519
+  },
+  "demProfile": [
+   508.2,
+   508.6,
+   509.1,
+   509.5,
+   510,
+   510.5,
+   510.9,
+   511.4,
+   511.8,
+   512.3,
+   512.7,
+   513.2,
+   513.7,
+   514.1,
+   514.6,
+   515,
+   515.5,
+   515.9,
+   516.4,
+   516.9,
+   517.3
+  ],
+  "demMin": 508.2,
+  "demMax": 517.3,
+  "demSag": 4.6,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 293476432,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 293476434,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 293476435,
+    "distM": 8,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯新村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "吐鲁克—喀纳斯新村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "吐鲁克—喀纳斯新村步道",
+   "cls": "path",
+   "d0m": 18,
+   "d1m": 0
+  },
+  "s2": [
+   {
+    "tile": "16_48604_22582",
+    "have": false
+   },
+   {
+    "tile": "16_48603_22582",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1562,
+  "tier": 1,
+  "cls": "path",
+  "name": "喀纳斯新村—吐鲁克步道",
+  "lenM": 136.2,
+  "e": [
+   455.9,
+   416.9
+  ],
+  "gradePct": -28.6,
+  "p0": {
+   "x": -7.9765,
+   "y": 2.1243,
+   "lat": 48.719103,
+   "lon": 86.991639,
+   "elev": 455.9
+  },
+  "p1": {
+   "x": -8.0149,
+   "y": 1.9936,
+   "lat": 48.717927,
+   "lon": 86.991117,
+   "elev": 416.9
+  },
+  "demProfile": [
+   446.2,
+   445.2,
+   444.3,
+   443.3,
+   442.1,
+   440.3,
+   438.5,
+   436.7,
+   434.9,
+   433.1,
+   431.2,
+   429.3,
+   427.4,
+   425.5,
+   423.6,
+   421.8,
+   420,
+   418.1,
+   416.2,
+   414.2,
+   412.2
+  ],
+  "demMin": 412.2,
+  "demMax": 446.2,
+  "demSag": 4.7,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 293476427,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 377825326,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 377825836,
+    "distM": 0,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 293476437,
+    "distM": 10,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   },
+   {
+    "osmId": 293475817,
+    "distM": 27,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   },
+   {
+    "osmId": 377825837,
+    "distM": 52,
+    "cls": "path",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "path"
+   }
+  ],
+  "end0Way": {
+   "name": "吐鲁克—喀纳斯新村步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "喀纳斯新村—吐鲁克步道",
+   "cls": "path",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48604_22584",
+    "have": false
+   },
+   {
+    "tile": "16_48604_22584",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1561,
+  "tier": 1,
+  "cls": "road",
+  "name": "喀纳斯—喀纳斯老村公路",
+  "lenM": 106.3,
+  "e": [
+   -24.6,
+   -6.3
+  ],
+  "gradePct": 17.2,
+  "p0": {
+   "x": -4.5361,
+   "y": -1.1608,
+   "lat": 48.689562,
+   "lon": 87.038377,
+   "elev": -24.6
+  },
+  "p1": {
+   "x": -4.4303,
+   "y": -1.1707,
+   "lat": 48.689472,
+   "lon": 87.039814,
+   "elev": -6.3
+  },
+  "demProfile": [
+   -23.6,
+   -23,
+   -22.5,
+   -22,
+   -21.4,
+   -20.9,
+   -20.4,
+   -19.8,
+   -19.3,
+   -18.8,
+   -18.2,
+   -17.7,
+   -16.5,
+   -15,
+   -13.5,
+   -12,
+   -10.5,
+   -9,
+   -7.5,
+   -6,
+   -4.5
+  ],
+  "demMin": -23.6,
+  "demMax": -4.5,
+  "demSag": -1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 252598140,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 252598147,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 1546925861,
+    "distM": 19,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 80138481,
+    "distM": 68,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   },
+   {
+    "osmId": 1546925860,
+    "distM": 72,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   }
+  ],
+  "end0Way": {
+   "name": "喀纳斯—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "喀纳斯—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48612_22592",
+    "have": false
+   },
+   {
+    "tile": "16_48613_22592",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1560,
+  "tier": 1,
+  "cls": "road",
+  "name": "白哈巴村—阿克哈巴南村公路",
+  "lenM": 66.4,
+  "e": [
+   -190.3,
+   -191.7
+  ],
+  "gradePct": -2.1,
+  "p0": {
+   "x": -23.2869,
+   "y": -1.188,
+   "lat": 48.689317,
+   "lon": 86.783645,
+   "elev": -190.3
+  },
+  "p1": {
+   "x": -23.2208,
+   "y": -1.182,
+   "lat": 48.689371,
+   "lon": 86.784543,
+   "elev": -191.7
+  },
+  "demProfile": [
+   -190.5,
+   -190.6,
+   -190.7,
+   -190.8,
+   -190.9,
+   -191,
+   -191.1,
+   -191.2,
+   -191.3,
+   -191.4,
+   -191.5,
+   -191.6,
+   -191.7,
+   -191.8,
+   -191.8,
+   -191.7,
+   -191.6,
+   -191.5,
+   -191.4,
+   -191.3,
+   -191.2
+  ],
+  "demMin": -191.8,
+  "demMax": -190.5,
+  "demSag": 0.1,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 252598134,
+    "distM": 0,
+    "cls": "residential",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "residential"
+   },
+   {
+    "osmId": 1282496102,
+    "distM": 0,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   }
+  ],
+  "end0Way": {
+   "name": "阿克哈巴南村—白哈巴村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "白哈巴村—阿克哈巴南村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48566_22592",
+    "have": false
+   },
+   {
+    "tile": "16_48566_22592",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1559,
+  "tier": 1,
+  "cls": "track",
+  "name": "那仁村庄—加格拉克希外土路",
+  "lenM": 219,
+  "e": [
+   283.2,
+   309
+  ],
+  "gradePct": 11.8,
+  "p0": {
+   "x": -21.491,
+   "y": 31.6059,
+   "lat": 48.984216,
+   "lon": 86.808043,
+   "elev": 283.2
+  },
+  "p1": {
+   "x": -21.5147,
+   "y": 31.8236,
+   "lat": 48.986173,
+   "lon": 86.807721,
+   "elev": 309
+  },
+  "demProfile": [
+   285.8,
+   286,
+   286.3,
+   286.6,
+   287.6,
+   288.9,
+   290.1,
+   291.5,
+   292.8,
+   294.2,
+   295,
+   295.7,
+   296.5,
+   297.3,
+   298.1,
+   298.9,
+   300.1,
+   301.3,
+   302.5,
+   303.8,
+   305.1
+  ],
+  "demMin": 285.8,
+  "demMax": 305.1,
+  "demSag": -2.6,
+  "crossings": [
+   {
+    "type": "river",
+    "name": "",
+    "at": 0.31,
+    "pt": [
+     -21.498,
+     31.674
+    ],
+    "nearestWays": [
+     {
+      "osmId": 184016708,
+      "distM": 0,
+      "cls": "waterway:river",
+      "bridge": "",
+      "tunnel": "",
+      "name": ""
+     }
+    ],
+    "bridgeway": null,
+    "hasBridgeTag": false
+   }
+  ],
+  "nearWays": [
+   {
+    "osmId": 184016707,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 184016710,
+    "distM": 0,
+    "cls": "track",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "track"
+   },
+   {
+    "osmId": 184016708,
+    "distM": 0,
+    "cls": "waterway:river",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": ""
+   }
+  ],
+  "end0Way": {
+   "name": "那仁村庄—加格拉克希外土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "那仁村庄—加格拉克希外土路",
+   "cls": "track",
+   "distM": 0
+  },
+  "parallelDup": null,
+  "s2": [
+   {
+    "tile": "16_48570_22510",
+    "have": false
+   },
+   {
+    "tile": "16_48570_22510",
+    "have": false
+   }
+  ]
+ },
+ {
+  "id": -1558,
+  "tier": 1,
+  "cls": "road",
+  "name": "喀纳斯—喀纳斯老村公路",
+  "lenM": 16.2,
+  "e": [
+   -90.7,
+   -88.8
+  ],
+  "gradePct": 11.7,
+  "p0": {
+   "x": -5.3052,
+   "y": -0.9549,
+   "lat": 48.691413,
+   "lon": 87.027928,
+   "elev": -90.7
+  },
+  "p1": {
+   "x": -5.304,
+   "y": -0.9387,
+   "lat": 48.691559,
+   "lon": 87.027945,
+   "elev": -88.8
+  },
+  "demProfile": [
+   -91.2,
+   -91.2,
+   -91.1,
+   -91.1,
+   -91.1,
+   -91,
+   -91,
+   -91,
+   -90.9,
+   -90.9,
+   -90.9,
+   -90.8,
+   -90.8,
+   -90.8,
+   -90.7,
+   -90.7,
+   -90.7,
+   -90.6,
+   -90.6,
+   -90.5,
+   -90.5
+  ],
+  "demMin": -91.2,
+  "demMax": -90.5,
+  "demSag": 0.5,
+  "crossings": [],
+  "nearWays": [
+   {
+    "osmId": 80139175,
+    "distM": 0,
+    "cls": "unclassified",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "unclassified"
+   },
+   {
+    "osmId": 1409132894,
+    "distM": 0,
+    "cls": "service",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "service"
+   },
+   {
+    "osmId": 377823310,
+    "distM": 7,
+    "cls": "tertiary",
+    "name": "",
+    "bridge": "",
+    "tunnel": "",
+    "surface": "",
+    "highway": "tertiary"
+   }
+  ],
+  "end0Way": {
+   "name": "喀纳斯—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "end1Way": {
+   "name": "喀纳斯—喀纳斯老村公路",
+   "cls": "road",
+   "distM": 0
+  },
+  "parallelDup": {
+   "name": "喀纳斯—喀纳斯老村公路",
+   "cls": "road",
+   "d0m": 0,
+   "d1m": 16
+  },
+  "s2": [
+   {
+    "tile": "16_48610_22591",
+    "have": false
+   },
+   {
+    "tile": "16_48610_22591",
+    "have": false
+   }
+  ]
+ }
+]
