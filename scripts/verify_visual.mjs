@@ -15,7 +15,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function main() {
   const proc = spawn(EDGE, [
     "--headless=new", "--disable-gpu", `--remote-debugging-port=${PORT}`,
-    "--user-data-dir=C:\\Temp\\kanas-edge-profile", "--window-size=1280,720",
+    "--user-data-dir=C:/Temp/kanas-edge-" + Date.now() + "", "--window-size=1280,720",
     "about:blank",
   ], { stdio: "ignore" });
 

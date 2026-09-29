@@ -10,6 +10,7 @@ import heapq
 import json
 import math
 import os
+import re
 import sys
 
 import numpy as np
@@ -29,7 +30,17 @@ M_PER_DEG_LAT = 111203.9
 M_PER_DEG_LON = 73610.1
 R_EARTH = 6371008.8
 
-SAMPLE_STEP = 12.0  # m between elevation samples along ways
+SAMPLE_STEP = 6.0  # m between elevation samples along ways
+
+
+def clean_name(n):
+    """strip invisible chars and non-Chinese/Latin script tails (Kazakh/Mongolian etc.)"""
+    if not n:
+        return ""
+    n = re.sub(r"[​-‏‪-‮﻿]", "", n)
+    n = re.split(r"[؀-ۿݐ-ݿ᠀-᢯Ѐ-ӿ]"
+                 r"[؀-ۿݐ-ݿ᠀-᢯Ѐ-ӿ\s​-‏]*", n)[0]
+    return n.strip(" 	·,-—、")
 
 
 def to_km(lat, lon):
@@ -374,13 +385,138 @@ def main():
         ed[6] = g_nodes[ed[0]][2]
         ed[7] = g_nodes[ed[1]][2]
 
-    # ---- bridge unmapped gaps: link dangling endpoints so the network stays routable ----
+    # ---- bridge unmapped gaps: connect dangling ends so trails read & route continuous ----
     deg = [0] * len(g_nodes)
     for ed in g_edges:
         deg[ed[0]] += 1
         deg[ed[1]] += 1
-    dangling = [i for i, d in enumerate(deg) if d == 1]
-    # component labels (union-find on edges)
+
+    def gdist(a, b):
+        return math.hypot(g_nodes[a][0] - g_nodes[b][0],
+                          g_nodes[a][1] - g_nodes[b][1]) * 1000.0
+
+    def add_link(a, b, cls, name):
+        idx = len(ways_out)
+        dd = gdist(a, b)
+        ways_out.append({
+            "id": -1000 - idx,
+            "cls": cls,
+            "name": name or "连接线",
+            "ref": "",
+            "surface": "",
+            "len": round(dd, 1),
+            "ascent": 0.0,
+            "descent": 0.0,
+            "minE": round(min(g_nodes[a][2], g_nodes[b][2]), 1),
+            "maxE": round(max(g_nodes[a][2], g_nodes[b][2]), 1),
+            "geom": [[g_nodes[a][0], g_nodes[a][1]], [g_nodes[b][0], g_nodes[b][1]]],
+            "geomLL": [],
+            "d": [0.0, round(dd, 1)],
+            "e": [g_nodes[a][2], g_nodes[b][2]],
+        })
+        g_edges.append([a, b, idx, 0.0, round(dd, 1), round(dd, 1),
+                        g_nodes[a][2], g_nodes[b][2]])
+        return idx
+
+    orig_edges = len(g_edges)
+    edge_geo = []
+    for ed in g_edges[:orig_edges]:
+        a, b = g_nodes[ed[0]], g_nodes[ed[1]]
+        edge_geo.append((a[0], a[1], b[0], b[1]))
+
+    def proj_on_edge(px, py, eidx):
+        ax, ay, bx, by = edge_geo[eidx]
+        dx, dy = bx - ax, by - ay
+        l2 = dx * dx + dy * dy
+        t = 0.0 if l2 == 0 else max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / l2))
+        qx, qy = ax + t * dx, ay + t * dy
+        return t, math.hypot(px - qx, py - qy), qx, qy
+
+    def free_end_dir(i):
+        for k in range(orig_edges):
+            ed = g_edges[k]
+            if ed[2] == -1:
+                continue
+            if ed[0] == i or ed[1] == i:
+                nb = ed[1] if ed[0] == i else ed[0]
+                vx, vy = g_nodes[i][0] - g_nodes[nb][0], g_nodes[i][1] - g_nodes[nb][1]
+                ln = math.hypot(vx, vy) or 1e-9
+                return vx / ln, vy / ln
+        return 1.0, 0.0
+
+    def src_way_of(i):
+        for k in range(orig_edges):
+            ed = g_edges[k]
+            if ed[2] != -1 and (ed[0] == i or ed[1] == i):
+                return ed[2]
+        return None
+
+    # Tier 1: trail continuations (fills 1-150 m mapping gaps between fragments;
+    # drawn in the source way's style so trails read as continuous)
+    n_t1 = 0
+    for i in range(len(g_nodes)):
+        if deg[i] != 1:
+            continue
+        dirx, diry = free_end_dir(i)
+        best = None
+        px0, py0 = g_nodes[i][0], g_nodes[i][1]
+        src_w0 = src_way_of(i)
+        src_cls = ways_out[src_w0]["cls"] if src_w0 is not None else "path"
+        TRAIL = {"path", "boardwalk", "steps"}
+        for eidx in range(orig_edges):
+            ed = g_edges[eidx]
+            if ed[2] == -1 or ed[0] == i or ed[1] == i:
+                continue
+            if ways_out[ed[2]]["cls"] == "link":
+                continue
+            t, dd_km, qx, qy = proj_on_edge(px0, py0, eidx)
+            dd = dd_km * 1000.0  # proj_on_edge works in km; thresholds are metres
+            if dd > 220 or dd < 1:
+                continue
+            lx, ly = (qx - px0) / dd_km, (qy - py0) / dd_km
+            if lx * dirx + ly * diry < 0.25:  # source side: >75 deg off = not a continuation
+                continue
+            tg = edge_geo[eidx]
+            tx, ty = tg[2] - tg[0], tg[3] - tg[1]
+            tln = math.hypot(tx, ty) or 1e-9
+            align = abs((tx / tln) * lx + (ty / tln) * ly)
+            if align < 0.35:  # target side: link must arrive roughly along the way
+                continue
+            tgt_cls = ways_out[ed[2]]["cls"]
+            if src_cls == tgt_cls:
+                pen = 0
+            elif (src_cls in TRAIL) == (tgt_cls in TRAIL):
+                pen = 150
+            else:
+                pen = 400
+            score = dd + pen + 40 * (1 - align)
+            if best is None or score < best[0]:
+                best = (score, eidx, dd, t, qx, qy)
+        if not best:
+            continue
+        score, eidx, dd, t, qx, qy = best
+        ed = g_edges[eidx]
+        way_i = ed[2]
+        d0, d1 = ed[3], ed[4]
+        new_node = len(g_nodes)
+        e0n, e1n = g_nodes[ed[0]][2], g_nodes[ed[1]][2]
+        g_nodes.append([round(qx, 5), round(qy, 5), round(e0n + (e1n - e0n) * t, 2)])
+        g_edges.append([ed[0], new_node, way_i, d0, round(d0 + (d1 - d0) * t, 1),
+                        round(ed[5] * t, 1), ed[6], g_nodes[new_node][2]])
+        g_edges.append([new_node, ed[1], way_i, round(d0 + (d1 - d0) * t, 1), d1,
+                        round(ed[5] * (1 - t), 1), g_nodes[new_node][2], ed[7]])
+        ed[2] = -1  # retire the original
+        src_w = src_way_of(i)
+        link_cls = ways_out[src_w]["cls"] if src_w is not None else "path"
+        link_name = ways_out[src_w]["name"] if src_w is not None else ""
+        add_link(i, new_node, link_cls, link_name)
+        n_t1 += 1
+        if n_t1 >= 400:
+            break
+    g_edges = [e for e in g_edges if e[2] != -1]
+    print(f"tier-1 trail-continuation links: {n_t1}")
+
+    # Tier 2: bigger gaps between disconnected components (marked as inferred)
     parent = list(range(len(g_nodes)))
 
     def find(i):
@@ -397,67 +533,30 @@ def main():
     for i in range(len(g_nodes)):
         r = find(i)
         comp_size[r] = comp_size.get(r, 0) + 1
-
+    deg2 = [0] * len(g_nodes)
+    for ed in g_edges:
+        deg2[ed[0]] += 1
+        deg2[ed[1]] += 1
+    ends = [i for i, d in enumerate(deg2) if d == 1]
     pairs = []
-    # pass A: any cross-component nodes within 45 m (soft breaks anywhere on the ways)
-    cell = {}
-    for i, g in enumerate(g_nodes):
-        key = (int(g[0] * 20), int(g[1] * 20))   # ~50 m cells (km units)
-        cell.setdefault(key, []).append(i)
-    for key, idxs in cell.items():
-        for dx in (-1, 0, 1):
-            for dy in (-1, 0, 1):
-                other = cell.get((key[0] + dx, key[1] + dy))
-                if not other:
-                    continue
-                for a in idxs:
-                    for b in other:
-                        if a >= b or find(a) == find(b):
-                            continue
-                        dd = math.hypot(g_nodes[a][0] - g_nodes[b][0],
-                                        g_nodes[a][1] - g_nodes[b][1]) * 1000.0
-                        if dd < 45:
-                            pairs.append((dd, a, b))
-    # pass B: dangling endpoints up to 1100 m between sizable components
-    for ii in range(len(dangling)):
-        for jj in range(ii + 1, len(dangling)):
-            a, b = dangling[ii], dangling[jj]
+    for ii in range(len(ends)):
+        for jj in range(ii + 1, len(ends)):
+            a, b = ends[ii], ends[jj]
             if find(a) == find(b):
                 continue
-            dd = math.hypot(g_nodes[a][0] - g_nodes[b][0], g_nodes[a][1] - g_nodes[b][1]) * 1000.0
-            if dd < 1100 and min(comp_size.get(find(a), 0), comp_size.get(find(b), 0)) >= 15:
+            dd = gdist(a, b)
+            if 1 <= dd < 1200 and min(comp_size.get(find(a), 0), comp_size.get(find(b), 0)) >= 15:
                 pairs.append((dd, a, b))
     pairs.sort()
-    n_link = 0
+    n_t2 = 0
     for dd, a, b in pairs:
-        if find(a) == find(b) or dd < 0.5:
+        if find(a) == find(b) or n_t2 >= 25:
             continue
-        if n_link >= 25:
-            break
-        idx = len(ways_out)
-        ways_out.append({
-            "id": -1000 - n_link,
-            "cls": "link",
-            "name": "数据缺口连接（地图数据未覆盖）",
-            "ref": "",
-            "surface": "",
-            "len": round(dd, 1),
-            "ascent": 0.0,
-            "descent": 0.0,
-            "minE": round(min(g_nodes[a][2], g_nodes[b][2]), 1),
-            "maxE": round(max(g_nodes[a][2], g_nodes[b][2]), 1),
-            "geom": [[g_nodes[a][0], g_nodes[a][1]], [g_nodes[b][0], g_nodes[b][1]]],
-            "geomLL": [],
-            "d": [0.0, round(dd, 1)],
-            "e": [g_nodes[a][2], g_nodes[b][2]],
-        })
-        u, v = a, b
-        g_edges.append([u, v, idx, 0.0, round(dd, 1), round(dd, 1),
-                        g_nodes[u][2], g_nodes[v][2]])
+        add_link(a, b, "link", "数据缺口连接（地图数据未覆盖）")
         ra, rb = find(a), find(b)
         parent[ra] = rb
-        n_link += 1
-    print(f"gap links added: {n_link}")
+        n_t2 += 1
+    print(f"tier-2 gap links: {n_t2}")
 
     # ---- curated shuttle lines: road-preferred shortest paths on the graph ----
     SHUTTLE_PAIRS = [
@@ -681,13 +780,14 @@ def main():
     seen = set()
 
     def add_poi(name, cat, lat, lon, desc="", tip=""):
+        name = clean_name(name) if name else ""
         key = (name or cat, round(lat, 4), round(lon, 4))
         if key in seen:
             return
         seen.add(key)
         x, y = to_km(lat, lon)
         pois.append({
-            "name": name or cat,
+            "name": name,
             "cat": cat,
             "x": round(x, 4),
             "y": round(y, 4),
@@ -728,7 +828,7 @@ def main():
     # (OSM rarely tags surface=boardwalk here; lake/river-side walks are boardwalks)
     n_board = 0
     for info in ways_out:
-        if info["cls"] not in ("path", "footway"):
+        if info["cls"] not in ("path", "footway") or not info["geomLL"]:
             continue
         lat = sum(p[0] for p in info["geomLL"]) / len(info["geomLL"])
         lon = sum(p[1] for p in info["geomLL"]) / len(info["geomLL"])
@@ -785,6 +885,111 @@ def main():
             continue
         add_poi(name, cat, float(lat), float(lon))
 
+
+    # ---- auto-naming: no unnamed / generic names may reach the UI ----
+    JUNK = {"", "村庄", "地点", "地点1", "地点2", "居住点", "村", "locality", "view",
+            "photo", "point", "poi", "unnamed", "未命名", "closed", "dock", "水体",
+            "山", "山峰", "草原", "桥", "码头", "连接线", "连接路", "小路", "步道",
+            "公路", "道路", "栈道", "trail", "path", "road", "track", "water walk"}
+    CAT_CN = {"view": "观景点", "photo": "机位", "station": "停靠点", "village": "村落",
+              "attraction": "景点", "info": "服务点", "service": "服务点",
+              "stay": "住宿点", "gate": "出入口"}
+    CLS_CN = {"road": "公路", "track": "土路", "path": "步道", "boardwalk": "栈道",
+              "steps": "台阶", "link": "连接线"}
+    PRIO = {"village": 0, "station": 1, "attraction": 2, "photo": 3, "view": 4,
+            "info": 5, "service": 6, "stay": 7, "gate": 8}
+
+    def junky(n):
+        if not n or n.strip() in JUNK:
+            return True
+        low = n.strip().lower()
+        return low.startswith("static") or low in ("view", "dock", "closed")
+
+    def compass(dx, dy):
+        names = ["北", "东北", "东", "东南", "南", "西南", "西", "西北"]
+        ang = math.degrees(math.atan2(dx, dy))
+        return names[int((ang + 22.5) // 45) % 8]
+
+    anchors = []
+    for p in pois:
+        p["name"] = clean_name(p["name"])
+        if not junky(p["name"]):
+            anchors.append((p["name"], p["x"], p["y"], PRIO.get(p["cat"], 5)))
+    for lk in lakes:
+        lk["name"] = clean_name(lk.get("name", ""))
+        if lk.get("name") and not junky(lk["name"]) and lk["geom"] and lk["geom"][0]:
+            ring = lk["geom"][0]
+            cx = sum(q[0] for q in ring) / len(ring)
+            cy = sum(q[1] for q in ring) / len(ring)
+            anchors.append((lk["name"], cx, cy, 3))
+    for rv in rivers:
+        rv["name"] = clean_name(rv.get("name", ""))
+        if rv.get("name") and not junky(rv["name"]) and rv["geom"]:
+            mid = rv["geom"][len(rv["geom"]) // 2]
+            anchors.append((rv["name"], mid[0], mid[1], 4))
+
+    def nearest_anchors(x, y, k=2, max_km=6.0):
+        scored = []
+        seen = set()
+        for nm, ax, ay, pr in anchors:
+            d = math.hypot(ax - x, ay - y)
+            if d > max_km or nm in seen:
+                continue
+            scored.append((d, pr, nm, ax, ay))
+        scored.sort(key=lambda z: (z[1], z[0]))
+        out = []
+        for d, pr, nm, ax, ay in scored:
+            if nm in seen:
+                continue
+            seen.add(nm)
+            out.append((nm, ax, ay, d))
+            if len(out) >= k:
+                break
+        return out
+
+    n_named_poi = 0
+    for p in pois:
+        if not junky(p["name"]):
+            continue
+        near = nearest_anchors(p["x"], p["y"], 1)
+        cat_cn = CAT_CN.get(p["cat"], "地点")
+        if near:
+            nm, ax, ay, d = near[0]
+            if d < 0.15:
+                p["name"] = f"{nm}旁{cat_cn}"
+            else:
+                p["name"] = f"{nm}{compass(p['x'] - ax, p['y'] - ay)}{cat_cn}"
+        else:
+            p["name"] = f"喀纳斯{cat_cn}·{abs(hash((p['x'], p['y']))) % 900 + 100}"
+        n_named_poi += 1
+
+    n_named_way = 0
+    for info in ways_out:
+        info["name"] = clean_name(info.get("name", ""))
+        if not junky(info["name"]) and info["cls"] != "link":
+            continue
+        if info["cls"] == "link" and info["name"].startswith("数据缺口"):
+            continue
+        g2 = info["geom"]
+        cx = sum(q[0] for q in g2) / len(g2)
+        cy = sum(q[1] for q in g2) / len(g2)
+        cls_cn = CLS_CN.get(info["cls"], "小路")
+        if info.get("ref"):
+            info["name"] = info["ref"]
+            n_named_way += 1
+            continue
+        near = nearest_anchors(cx, cy, 2)
+        if len(near) < 2:
+            near = nearest_anchors(cx, cy, 2, max_km=1e9)
+        if len(near) >= 2:
+            info["name"] = f"{near[0][0]}—{near[1][0]}{cls_cn}"
+        elif near:
+            info["name"] = f"{near[0][0]}{cls_cn}"
+        else:
+            info["name"] = f"喀纳斯{cls_cn}·{abs(hash(info['id'])) % 900 + 100}"
+        n_named_way += 1
+    print(f"auto-named: {n_named_poi} POIs, {n_named_way} ways")
+
     # shuttle lines with stop lists (needs the final POI set)
     print("building shuttle lines ...")
     shuttles_out = build_shuttles(pois)
@@ -811,7 +1016,7 @@ def main():
 
     # ---- hillshade + hypsometric background ----
     print("rendering hillshade ...")
-    factor = 2
+    factor = 1
     small = dem.elev[::factor, ::factor].astype(np.float32)
     sh, sw = small.shape
     pix_m = (dem.east - dem.west) / dem.w * M_PER_DEG_LON / factor
@@ -830,12 +1035,17 @@ def main():
              (60, (128, 176, 96)), (180, (188, 196, 112)), (320, (206, 176, 116)),
              (480, (186, 142, 96)), (650, (150, 118, 100)), (850, (168, 160, 156)),
              (1100, (232, 230, 228))]
-    elevs_c = np.clip(rel_grid, stops[0][0], stops[-1][0])
-    r_ch = np.interp(elevs_c, [s[0] for s in stops], [s[1][0] for s in stops])
-    g_ch = np.interp(elevs_c, [s[0] for s in stops], [s[1][1] for s in stops])
-    b_ch = np.interp(elevs_c, [s[0] for s in stops], [s[1][2] for s in stops])
     shade = (0.42 + 0.58 * illum)
-    rgb = np.stack([r_ch * shade, g_ch * shade, b_ch * shade], axis=-1)
+    xs = [s[0] for s in stops]
+    rgb = np.empty((sh, sw, 3), dtype=np.float32)
+    step_rows = 512
+    for r0 in range(0, sh, step_rows):
+        r1 = min(sh, r0 + step_rows)
+        elevs_c = np.clip(rel_grid[r0:r1], stops[0][0], stops[-1][0])
+        sh_blk = shade[r0:r1]
+        for ch in range(3):
+            vals = np.interp(elevs_c, xs, [s[1][ch] for s in stops])
+            rgb[r0:r1, :, ch] = vals * sh_blk
     img = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8), "RGB")
     img = img.quantize(colors=256, method=Image.MEDIANCUT)
     img.save(OUT_HS, optimize=True)
@@ -848,7 +1058,7 @@ def main():
 
     # ---- client DEM grid (cursor elevation + straight profiles) ----
     print("packing client DEM grid ...")
-    step = max(1, int(math.ceil(max(dem.h, dem.w) / 1100)))
+    step = 5
     g = dem.elev[::step, ::step].astype(np.float32) - e0
     g = np.clip(np.round(g), -32000, 32000).astype("<i2")
     rows, cols = g.shape

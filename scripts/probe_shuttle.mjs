@@ -6,7 +6,7 @@ const PORT = 9338;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const proc = spawn(EDGE, [
   "--headless=new", "--disable-gpu", `--remote-debugging-port=${PORT}`,
-  "--user-data-dir=C:\\Temp\\kanas-edge-sh", "--window-size=1280,720", "about:blank",
+  "--user-data-dir=C:/Temp/kanas-edge-" + Date.now() + "" + Date.now(), "--window-size=1280,720", "about:blank",
 ], { stdio: "ignore" });
 let tabs;
 for (let i = 0; i < 40; i++) {
