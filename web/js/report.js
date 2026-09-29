@@ -71,7 +71,7 @@
     // 数据卡
     const s = data.stats;
     const cards = [
-      [fmtD(s.len), "总距离"], [fmtT(s.hours), "预计用时（散步配速）"],
+      [fmtD(s.len), "总距离"], [fmtT(s.hours), "预计用时（当前配速）"],
       [Math.round(s.ascent) + " m", "累计爬升"], [Math.round(s.descent) + " m", "累计下降"],
       [fmtE(s.maxE, data.eOff), "最高点"], [fmtE(s.minE, data.eOff), "最低点"],
       [(s.len ? (100 * (s.ascent + s.descent) / s.len).toFixed(1) : "0") + " %", "平均起伏率"],
@@ -362,6 +362,7 @@
   const CLS_CN = { road: "公路", track: "土路", path: "步道", boardwalk: "栈道", steps: "台阶", link: "连接线" };
 
   function buildSegments(line, prof) {
+    const pace = (K.router && K.router.getPace) ? K.router.getPace() : 3.6;
     const segs = [];
     let cur = null, curD = 0;
     const step = 30; // m
@@ -391,7 +392,7 @@
     if (cur) segs.push(cur);
     segs.forEach((sg) => {
       const grade = sg.len ? (sg.asc + sg.desc) / sg.len : 0;
-      sg.hours = (sg.len / 1000) / (3.6 * Math.exp(-2.5 * grade)) * (sg.cls === "台阶" ? 1.35 : 1);
+      sg.hours = (sg.len / 1000) / (pace * Math.exp(-2.5 * grade)) * (sg.cls === "台阶" ? 1.35 : 1);
     });
     return segs;
   }
@@ -470,7 +471,7 @@
     const notes = [
       "路网与地名：OpenStreetMap（ODbL）；高程：AWS elevation-tiles-prod（Terrarium DEM，z13 约 12.6 m/格，纵向误差约 ±10 m）。",
       "高程基准：" + raw.zeroName + " 为 0 m（绝对高程约 " + raw.zeroAbs + " m），报告中除注明外均为相对高程。",
-      "用时按散步配速估算：平地约 3.6 km/h，并按坡度与路面（台阶 ×1.35、土路 ×1.18、公路 ×1.22、缺口连接 ×2.4）修正；实际请按体力与停留调整。",
+      "用时按当前配速估算：平地约 " + ((K.router && K.router.getPace) ? K.router.getPace().toFixed(1) : "3.6") + " km/h（可在网页中调整），并按坡度与路面（台阶 ×1.35、土路 ×1.18、公路 ×1.22、缺口连接 ×2.4）修正；实际请按体力与停留调整。",
       "分段归属为沿线路取最近道路的估算值，与实际走线可能略有出入；「缺口连接」段为地图数据未覆盖的推断连接，谨慎通行。",
       "本报告由离线网页自动生成，仅供徒步规划参考，不替代实地判断与官方公告。",
     ];

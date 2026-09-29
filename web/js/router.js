@@ -68,8 +68,18 @@
   }
 
   const CLS_MULT = { path: 1.0, boardwalk: 1.0, steps: 1.35, track: 1.18, road: 1.22, link: 2.4 };
-  const WALK_V0 = 4.3;   // 散步配速基准（平地约 3.6 km/h）
-  const WALK_KMH = 4.5;  // A* 启发式速度上限（须 ≥ 最快可能速度，保证启发式可采纳）
+  let WALK_V0 = 4.3;   // Tobler 基准速度；平地实际速度 ≈ WALK_V0 × 0.84
+  let WALK_KMH = 4.5;  // A* 启发式速度上限（须 ≥ 最快可能速度，保证启发式可采纳）
+  const FLAT_K = Math.exp(-3.5 * 0.05); // 平地速度 = WALK_V0 × FLAT_K
+
+  function setPace(flatKmh) {
+    const f = Math.min(8, Math.max(2, Number(flatKmh) || 3.6));
+    WALK_V0 = f / FLAT_K;
+    WALK_KMH = WALK_V0 * 1.05;
+  }
+  function getPace() {
+    return WALK_V0 * FLAT_K;
+  }
 
   function toblerHours(lenM, dE) {
     let s = dE / Math.max(lenM, 1);
@@ -526,5 +536,6 @@
     straightProfile, straightVia,
     sliceWayDir, sampleElevAt, edgeProfile,
     computeStats, fmtDist, fmtTime, toblerHours, nodes, edges,
+    setPace, getPace,
   };
 })();

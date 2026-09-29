@@ -400,6 +400,38 @@
   const hsImg = new Image();
   hsImg.src = "data/hillshade.png";
 
+  // ---------------- 步行速度设置 ----------------
+  const paceSel = $("#pace-select");
+  const paceCus = $("#pace-custom");
+  function applyPace(v, quiet) {
+    const f = Math.min(8, Math.max(2, parseFloat(v) || 3.6));
+    router.setPace(f);
+    try { localStorage.setItem("kanas_pace", String(f)); } catch (e) {}
+    paceCus.value = f.toFixed(1);
+    if (state.current) compute();
+    if (!quiet) toast("步行速度已设为 " + f.toFixed(1) + " km/h（平地），用时已更新");
+  }
+  paceSel.addEventListener("change", () => {
+    if (paceSel.value === "custom") {
+      paceCus.hidden = false;
+      paceCus.focus();
+      applyPace(paceCus.value);
+    } else {
+      paceCus.hidden = true;
+      applyPace(paceSel.value);
+    }
+  });
+  paceCus.addEventListener("change", () => applyPace(paceCus.value));
+  (function initPace() {
+    let saved = 3.6;
+    try { saved = parseFloat(localStorage.getItem("kanas_pace")) || 3.6; } catch (e) {}
+    const presets = ["3.0", "3.6", "4.5", "5.5"];
+    const key = saved.toFixed(1);
+    if (presets.indexOf(key) >= 0) paceSel.value = key;
+    else { paceSel.value = "custom"; paceCus.hidden = false; }
+    applyPace(saved, true);
+  })();
+
   $("#btn-pdf").addEventListener("click", async () => {
     const c = state.current;
     if (!c) { toast("请先规划一条线路"); return; }
@@ -507,6 +539,22 @@
         seenNames.add(p.name);
       }
     });
+    D.lakes.forEach((lk, i) => {
+      if (lk.name && lk.name.indexOf(q) >= 0 && !seenNames.has(lk.name)) {
+        seenNames.add(lk.name);
+        const ring = lk.geom[0];
+        let cx = 0, cy = 0;
+        ring.forEach((p) => { cx += p[0]; cy += p[1]; });
+        hits.push({ kind: "lake", i, name: lk.name, cat: "湖泊", x: cx / ring.length, y: cy / ring.length });
+      }
+    });
+    D.rivers.forEach((rv, i) => {
+      if (rv.name && rv.name.indexOf(q) >= 0 && !seenNames.has(rv.name)) {
+        seenNames.add(rv.name);
+        const m = rv.geom[Math.floor(rv.geom.length / 2)];
+        hits.push({ kind: "river", i, name: rv.name, cat: rv.cls === "river" ? "河流" : "溪流", x: m[0], y: m[1] });
+      }
+    });
     D.ways.forEach((w, i) => {
       if (w.name && w.name.indexOf(q) >= 0 && !seenNames.has(w.name)) {
         seenNames.add(w.name);
@@ -521,6 +569,11 @@
         if (h.kind === "poi") {
           api.flyToKm(h.x, h.y, 13);
           api.openPoiPopup(h.i, L.latLng(h.y, h.x));
+        } else if (h.kind === "lake") {
+          api.flyToKm(h.x, h.y, 12);
+          api.openLakePopup(D.lakes[h.i], L.latLng(h.y, h.x));
+        } else if (h.kind === "river") {
+          api.flyToKm(h.x, h.y, 13);
         } else {
           api.highlightWay(h.i);
           api.flyToKm(h.x, h.y, 13);

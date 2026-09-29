@@ -470,7 +470,7 @@
     placeAB, placeWaypoints, clearAB, drawRoute, clearRoute,
     showProfileMarker, hideProfileMarker,
     highlightWay,
-    openWayPopup, openPoiPopup,
+    openWayPopup, openPoiPopup, openLakePopup,
     updateScaleBar,
     flyToKm(x, y, zoom) {
       map.flyTo([y, x], zoom === undefined ? Math.max(map.getZoom(), 12) : zoom);
