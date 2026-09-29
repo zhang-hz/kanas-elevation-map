@@ -1111,9 +1111,39 @@ def main():
         n_named_way += 1
     print(f"auto-named: {n_named_poi} POIs, {n_named_way} ways")
 
+    # curated way renames: real-world trail names over auto-generated ones
+    # (trail classes only, short ways only, must hug a named water body)
+    n_renamed = 0
+    for rn in curated.get("wayRenames") or []:
+        bs, bw, bn, be = rn["box"]
+        for info in ways_out:
+            if info["cls"] not in rn.get("classes", []):
+                continue
+            if info["len"] > 7000:
+                continue
+            g2 = info["geom"]
+            cx = sum(q[0] for q in g2) / len(g2)
+            cy = sum(q[1] for q in g2) / len(g2)
+            la = cy * 1000.0 / M_PER_DEG_LAT + LAT0
+            lo = cx * 1000.0 / M_PER_DEG_LON + LON0
+            if not (bs <= la <= bn and bw <= lo <= be):
+                continue
+            if not near_water(la, lo, 700.0):
+                continue
+            info["name"] = rn["name"]
+            n_renamed += 1
+    print(f"curated way renames: {n_renamed}")
+
     # shuttle lines with stop lists (needs the final POI set)
     print("building shuttle lines ...")
     shuttles_out = build_shuttles(pois)
+
+    # curated shuttle notes: fares, hours, direction quirks (dated sources)
+    for sh in shuttles_out:
+        for sn in curated.get("shuttleNotes") or []:
+            if sn.get("match") and sn["match"] in sh["name"]:
+                sh["note"] = sn.get("note", "")
+                break
 
     # ---- routes (bus / shuttle relations) ----
     routes_out = []

@@ -376,6 +376,7 @@
       K.router.fmtDist(rt.len) + '</b></span>' +
       '<span class="popup-metric">停靠站 <b>' + (rt.stops || []).length + '</b></span>' +
       '<span class="popup-metric">沿线机位 <b>' + (rt.spots || []).length + '</b></span></div>' +
+      (rt.note ? '<div class="popup-tip">🚌 ' + esc(rt.note) + '</div>' : "") +
       '<canvas class="popup-mini-canvas"></canvas>' +
       (stopsHtml ? '<div class="stop-head">停靠站序（点击定位）</div><ul class="stop-list">' + stopsHtml + '</ul>' : "") +
       (spotsHtml ? '<div class="stop-head">沿线机位</div><ul class="stop-list">' + spotsHtml + '</ul>' : "") +
@@ -405,6 +406,22 @@
   function openPoiPopup(i, latlng) {
     const p = D.pois[i];
     const el = document.createElement("div");
+    // 停靠线路：按站点 POI 与各线路停靠点距离匹配（≤80 m）
+    const serving = [];
+    (D.shuttles || []).forEach(sh => {
+      (sh.stops || []).forEach((st, si) => {
+        if (Math.hypot(st.x - p.x, st.y - p.y) * 1000 <= 80) {
+          const short = sh.name.split("：")[0].split(" ↔ ")[0];
+          if (!serving.some(s => s.line === short)) {
+            serving.push({ line: short, idx: si + 1, total: sh.stops.length, full: sh.name });
+          }
+        }
+      });
+    });
+    const busHtml = serving.length
+      ? '<div class="popup-tip">🚌 停靠线路：' + serving.map(s =>
+          esc(s.line) + "（本站序 " + s.idx + "/" + s.total + "）").join("；") + "</div>"
+      : "";
     el.innerHTML =
       '<div class="popup-title">' + esc(p.name) + "</div>" +
       '<span class="popup-tag ' + (p.cat === "photo" ? "" : "blue") + '">' +
@@ -412,6 +429,7 @@
       '<div class="popup-row"><span class="popup-metric">相对高程 <b>' +
       (p.e - K.app.eOff()).toFixed(1) + " m</b></span>" +
       '<span class="popup-metric">坐标 <b>' + p.lat.toFixed(4) + ", " + p.lon.toFixed(4) + "</b></span></div>" +
+      busHtml +
       (p.desc ? '<div class="popup-desc">' + esc(p.desc) + "</div>" : "") +
       (p.tip ? '<div class="popup-tip">📷 ' + esc(p.tip) + "</div>" : "") +
       '<div class="popup-btn-row">' +
